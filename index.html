@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Control de Activaciones y Degustaciones</title>
+<style>
+/* ---------- tema oscuro (por defecto) ---------- */
+:root{
+  --bg:#0f1319; --panel:#171c24; --panel2:#1e242e; --ink:#e6e9ef; --muted:#8f9aa8; --line:#252c36;
+  --accent:#4d9dff; --accent-soft:#16283f; --shadow:0 1px 3px rgba(0,0,0,.4);
+  --c1:#4d9dff; --c2:#22b8a6; --c3:#ff9f43; --c4:#a978f0; --c5:#ff6b9d; --c6:#7c8ba1; --c7:#2dc7d9; --c8:#d4b106;
+  --deg:#4d9dff; --act:#ff9f43; --apo:#22b8a6; --alert:#ff6b9d;
+}
+/* ---------- tema claro (sólo con el interruptor) ---------- */
+:root[data-theme="light"]{
+  --bg:#f5f6f8; --panel:#ffffff; --panel2:#f0f2f5; --ink:#15181d; --muted:#666e7a; --line:#e2e5ea;
+  --accent:#1f6feb; --accent-soft:#e8f0fe; --shadow:0 1px 3px rgba(0,0,0,.07);
+  --c1:#1f6feb; --c2:#00897b; --c3:#e8710a; --c4:#7b3fbf; --c5:#c2185b; --c6:#4a5568; --c7:#0097a7; --c8:#8d6e00;
+  --deg:#1f6feb; --act:#e8710a; --apo:#00897b; --alert:#c2185b;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{margin:0;color:var(--ink);font:14px/1.5 "Segoe UI",system-ui,-apple-system,sans-serif}
+.wrap{max-width:1500px;margin:0 auto;padding:20px 22px 60px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:18px}
+h1{font-size:22px;margin:0;letter-spacing:-.3px}
+.sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;box-shadow:var(--shadow)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
+.filters label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px;font-weight:600}
+select,input[type=search]{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--panel2);color:var(--ink);font-size:13px}
+select:focus,input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.btn{padding:7px 13px;border:1px solid var(--line);border-radius:6px;background:var(--panel2);color:var(--ink);cursor:pointer;font-size:13px}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.12);color:#fff}
+.btn.icon{padding:7px 10px;font-size:15px;line-height:1}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kpi .v{font-size:25px;font-weight:700;letter-spacing:-.8px;line-height:1.1}
+.kpi .l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-top:5px;font-weight:600}
+.kpi .h{font-size:11.5px;color:var(--muted);margin-top:3px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;margin-bottom:16px}
+.card h3{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:700}
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:150px 1fr auto;gap:9px;align-items:center;font-size:12.5px}
+.bar .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .t{height:16px;border-radius:4px;background:var(--accent);min-width:2px;transition:width .3s}
+.bar .val{font-variant-numeric:tabular-nums;font-weight:600;color:var(--muted);font-size:12px;white-space:nowrap}
+.tl{display:flex;align-items:flex-end;gap:3px;height:130px;padding-top:6px}
+.tl>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;min-width:0}
+.tl .b{width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px}
+.tl .d{font-size:9px;color:var(--muted);writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
+.tbl-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;min-width:1400px}
+th{background:var(--panel2);text-align:left;padding:9px 10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;position:sticky;top:0;z-index:1;font-weight:700}
+th:hover{color:var(--accent)}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:hover{background:var(--accent-soft)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-block;padding:2px 7px;border-radius:11px;font-size:10.5px;font-weight:700;color:#0f1319;white-space:nowrap}
+.t-Degustación{background:var(--deg)} .t-Activación{background:var(--act)} .t-Apoyo{background:var(--apo)}
+:root[data-theme="light"] .tag{color:#fff}
+.obs{max-width:290px;font-size:11.5px;color:var(--muted)}
+.warn{color:var(--alert);font-weight:600}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:10px}
+.legend span i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+footer{margin-top:26px;font-size:11.5px;color:var(--muted);text-align:center}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--accent);
+  color:var(--ink);padding:10px 18px;border-radius:8px;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.5);
+  opacity:0;pointer-events:none;transition:opacity .25s}
+.toast.on{opacity:1}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div>
+    <h1>Control de Activaciones y Degustaciones</h1>
+    <div class="sub" id="meta"></div>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="btn icon" id="tema" title="Cambiar entre fondo oscuro y claro">◐</button>
+    <button class="btn" id="reset">Limpiar filtros</button>
+    <button class="btn primary" id="xlsx">Descargar Excel</button>
+  </div>
+</header>
+
+<div class="panel filters">
+  <div><label>Mes</label><select id="f-mes"></select></div>
+  <div><label>Ejecutivo solicitante</label><select id="f-eje"></select></div>
+  <div><label>Cliente</label><select id="f-cli"></select></div>
+  <div><label>Tipo</label><select id="f-tipo"></select></div>
+  <div><label>Cadena</label><select id="f-cad"></select></div>
+  <div><label>Región</label><select id="f-reg"></select></div>
+  <div><label>Buscar</label><input type="search" id="f-q" placeholder="local, campaña, PPTO..."></div>
+</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="grid">
+  <div class="panel card"><h3>Actividades por ejecutivo</h3><div class="bars" id="ch-eje"></div></div>
+  <div class="panel card"><h3>Actividades por cliente</h3><div class="bars" id="ch-cli"></div></div>
+  <div class="panel card"><h3>Actividades por tipo</h3><div class="bars" id="ch-tipo"></div>
+    <div class="legend">
+      <span><i style="background:var(--deg)"></i>Degustación</span>
+      <span><i style="background:var(--act)"></i>Activación</span>
+      <span><i style="background:var(--apo)"></i>Apoyo</span>
+    </div>
+  </div>
+  <div class="panel card"><h3>Actividades por cadena</h3><div class="bars" id="ch-cad"></div></div>
+  <div class="panel card"><h3>Actividades por región</h3><div class="bars" id="ch-reg"></div></div>
+  <div class="panel card"><h3>Costo promotores por ejecutivo (CLP)</h3><div class="bars" id="ch-costo"></div></div>
+</div>
+
+<div class="panel card" style="margin-bottom:16px">
+  <h3>Actividades por fecha de inicio</h3>
+  <div class="tl" id="ch-tl"></div>
+</div>
+
+<div class="panel">
+  <div class="tbl-head">
+    <h3 style="margin:0">Detalle <span id="cnt" style="color:var(--accent)"></span></h3>
+    <span style="font-size:11.5px;color:var(--muted)">Haz clic en un encabezado para ordenar</span>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <div class="empty" id="empty" style="display:none">Sin registros para los filtros seleccionados.</div>
+</div>
+
+<footer id="foot"></footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+function fatal(titulo, detalle){
+  document.querySelector(".wrap").innerHTML =
+    '<div class="panel" style="border-color:var(--alert)">'+
+    '<h1 style="color:var(--alert);margin-bottom:10px">'+titulo+'</h1>'+
+    '<p style="font-size:14px;line-height:1.6">'+detalle+'</p></div>';
+}
+
+/* ---------------- tema ---------------- */
+(function(){
+  var t = null;
+  try { t = localStorage.getItem("act-tema"); } catch(e){}
+  if (t === "light") document.documentElement.setAttribute("data-theme","light");
+})();
+document.getElementById("tema").onclick = function(){
+  var el = document.documentElement;
+  var claro = el.getAttribute("data-theme") === "light";
+  if (claro) el.removeAttribute("data-theme"); else el.setAttribute("data-theme","light");
+  try { localStorage.setItem("act-tema", claro ? "dark" : "light"); } catch(e){}
+};
+
+/* ---------------- datos ----------------
+   Tres modos, según cómo quedó reemplazado el marcador:
+   - "__SIN_REEMPLAZAR__"  -> es la plantilla cruda, no un dashboard usable
+   - un objeto JSON        -> versión local autocontenida (funciona sin servidor)
+   - null                  -> versión web, pide datos.json al servidor         */
+const EMBEDDED = null;
+
+let DATA = null, R = null;
+
+async function cargarDatos(){
+  if (EMBEDDED === "__SIN_REEMPLAZAR__") {
+    fatal("Este archivo es la plantilla, no el dashboard",
+      "Estás viendo <b>plantilla_dashboard.tpl</b>, que no contiene datos.<br><br>"+
+      "Abre <b>Dashboard_Activaciones.html</b> en esta misma carpeta.<br><br>"+
+      "Si ese archivo no existe, ejecuta <code>Actualizar.ps1</code> para generarlo.");
+    return false;
+  }
+  if (EMBEDDED) { DATA = EMBEDDED; R = DATA.registros; return true; }
+
+  // versión web: datos.json aparte, con cache-busting
+  try {
+    const resp = await fetch("datos.json?v="+Date.now(), {cache:"no-store"});
+    if (!resp.ok) throw new Error("HTTP "+resp.status);
+    DATA = await resp.json();
+    R = DATA.registros;
+    return true;
+  } catch (e) {
+    fatal("No se pudieron cargar los datos",
+      "No fue posible leer <b>datos.json</b>: "+e.message+"<br><br>"+
+      "Si abriste este archivo con doble clic desde tu PC, el navegador bloquea la lectura "+
+      "de archivos vecinos. Usa <b>Dashboard_Activaciones.html</b> para trabajar sin conexión, "+
+      "o abre la versión publicada en GitHub Pages.");
+    return false;
+  }
+}
+
+const COLS = [
+  ["id","ID","t",12],["fecha_solicitud","Solicitado","d",13],["ejecutivo_solicitante","Ejecutivo solicitante","t",20],
+  ["solicitante_cliente","Solicitante cliente","t",18],["presupuesto","Presupuesto","t",18],["cliente","Cliente","t",14],
+  ["campana","Campaña","t",26],["tipo","Tipo","tag",13],["cadena","Cadena","t",17],["nombre_local","Nombre local","t",34],
+  ["comuna","Comuna","t",14],["region","Región","t",14],["fecha_inicio","Fecha inicio","d",12],["fecha_termino","Fecha término","d",13],
+  ["horario","Horario","t",22],["duracion_horas","Hrs","n",7],["cant_promotores","Promotores","n",11],["turnos","Turnos","n",8],
+  ["pago_por_turno","Pago x turno","clp",13],["costo_promotores","Costo promotores","clp",15],
+  ["compra_producto","Compra producto","clp",15],["fondo_insumos","Fondo insumos","clp",13],
+  ["gestion_counter","Gestión counter","clp",14],["observaciones","Observaciones","obs",60]
+];
+
+function prepararDatos(){
+  R.forEach(r=>{
+    r.mes = r.fecha_inicio ? r.fecha_inicio.slice(0,7) : (r.fecha_solicitud||"").slice(0,7);
+    r.costo_promotores = (r.pago_por_turno||0) * (r.cant_promotores||0) * (r.turnos||0);
+    r.prom_turno = (r.cant_promotores||0) * (r.turnos||0);
+    r._s = [r.nombre_local,r.campana,r.presupuesto,r.comuna,r.cliente,r.ejecutivo_solicitante,
+            r.solicitante_cliente,r.observaciones,r.asunto].join(" ").toLowerCase();
+  });
+}
+
+const MESNOM = {"01":"ene","02":"feb","03":"mar","04":"abr","05":"may","06":"jun",
+                "07":"jul","08":"ago","09":"sep","10":"oct","11":"nov","12":"dic"};
+const mesLabel = m => m ? MESNOM[m.slice(5,7)]+" "+m.slice(0,4) : "(sin fecha)";
+const clp = v => (v===null||v===undefined||v==="") ? "—" : "$"+Number(v).toLocaleString("es-CL");
+const nm  = v => (v===null||v===undefined||v==="") ? "—" : Number(v).toLocaleString("es-CL");
+
+const F = {mes:"",eje:"",cli:"",tipo:"",cad:"",reg:"",q:""};
+let sortK="fecha_inicio", sortD=1;
+
+function fill(id,key,label){
+  const sel=document.getElementById(id);
+  const vals=[...new Set(R.map(r=>r[key]).filter(v=>v!==null&&v!==""))].sort((a,b)=>String(a).localeCompare(String(b),"es"));
+  sel.innerHTML='<option value="">Todos</option>'+vals.map(v=>`<option value="${v}">${label?label(v):v}</option>`).join("");
+}
+function llenarFiltros(){
+  fill("f-mes","mes",mesLabel); fill("f-eje","ejecutivo_solicitante"); fill("f-cli","cliente");
+  fill("f-tipo","tipo"); fill("f-cad","cadena"); fill("f-reg","region");
+}
+
+const map={"f-mes":"mes","f-eje":"eje","f-cli":"cli","f-tipo":"tipo","f-cad":"cad","f-reg":"reg","f-q":"q"};
+Object.keys(map).forEach(id=>document.getElementById(id).addEventListener("input",e=>{
+  F[map[id]]=e.target.value; render();
+}));
+document.getElementById("reset").onclick=()=>{
+  Object.keys(F).forEach(k=>F[k]="");
+  Object.keys(map).forEach(id=>document.getElementById(id).value="");
+  render();
+};
+
+function filtered(){
+  return R.filter(r=>
+    (!F.mes||r.mes===F.mes) && (!F.eje||r.ejecutivo_solicitante===F.eje) &&
+    (!F.cli||r.cliente===F.cli) && (!F.tipo||r.tipo===F.tipo) &&
+    (!F.cad||r.cadena===F.cad) && (!F.reg||r.region===F.reg) &&
+    (!F.q||r._s.includes(F.q.toLowerCase()))
+  );
+}
+
+function agg(rows,key,valFn){
+  const m={};
+  rows.forEach(r=>{const k=r[key]||"(sin dato)"; m[k]=(m[k]||0)+(valFn?valFn(r):1)});
+  return Object.entries(m).sort((a,b)=>b[1]-a[1]);
+}
+
+function bars(el,data,fmt,colorFn){
+  const max=Math.max(1,...data.map(d=>d[1]));
+  el.innerHTML = data.length ? data.map((d,i)=>{
+    const c = colorFn ? colorFn(d[0]) : `var(--c${(i%8)+1})`;
+    return `<div class="bar"><span class="n" title="${d[0]}">${d[0]}</span>
+      <span class="t" style="width:${(d[1]/max*100).toFixed(1)}%;background:${c}"></span>
+      <span class="val">${fmt(d[1])}</span></div>`;
+  }).join("") : '<div style="color:var(--muted);font-size:12.5px">Sin datos</div>';
+}
+const tipoColor = t => t==="Degustación"?"var(--deg)":t==="Activación"?"var(--act)":"var(--apo)";
+
+let sortedRows = [];
+
+function render(){
+  const rows=filtered();
+
+  const acts=rows.length;
+  const promTurno=rows.reduce((s,r)=>s+r.prom_turno,0);
+  const costo=rows.reduce((s,r)=>s+r.costo_promotores,0);
+  const compra=rows.reduce((s,r)=>s+(r.compra_producto||0)*(r.turnos||1),0);
+  const insumos=rows.reduce((s,r)=>s+(r.fondo_insumos||0),0);
+  const counter=rows.reduce((s,r)=>s+(r.gestion_counter||0),0);
+  const ppto=new Set(rows.map(r=>r.presupuesto).filter(Boolean)).size;
+  const locales=new Set(rows.map(r=>r.nombre_local)).size;
+  const sinPago=rows.filter(r=>r.pago_por_turno===null||r.pago_por_turno===undefined).length;
+  const sinPpto=rows.filter(r=>!r.presupuesto).length;
+
+  document.getElementById("kpis").innerHTML=`
+    <div class="kpi"><div class="v">${acts}</div><div class="l">Actividades</div></div>
+    <div class="kpi"><div class="v">${nm(promTurno)}</div><div class="l">Promotores × turno</div></div>
+    <div class="kpi"><div class="v">${clp(costo)}</div><div class="l">Costo promotores</div>
+      ${sinPago?`<div class="h warn">${sinPago} sin pago informado</div>`:""}</div>
+    <div class="kpi"><div class="v">${clp(compra)}</div><div class="l">Compra producto</div></div>
+    <div class="kpi"><div class="v">${clp(insumos+counter)}</div><div class="l">Insumos + counter</div>
+      <div class="h">${clp(insumos)} + ${clp(counter)}</div></div>
+    <div class="kpi"><div class="v">${ppto}</div><div class="l">Presupuestos</div>
+      ${sinPpto?`<div class="h warn">${sinPpto} sin N° PPTO</div>`:""}</div>
+    <div class="kpi"><div class="v">${locales}</div><div class="l">Locales / PDV</div></div>`;
+
+  bars(document.getElementById("ch-eje"),agg(rows,"ejecutivo_solicitante"),nm);
+  bars(document.getElementById("ch-cli"),agg(rows,"cliente"),nm);
+  bars(document.getElementById("ch-tipo"),agg(rows,"tipo"),nm,tipoColor);
+  bars(document.getElementById("ch-cad"),agg(rows,"cadena"),nm);
+  bars(document.getElementById("ch-reg"),agg(rows,"region"),nm);
+  bars(document.getElementById("ch-costo"),agg(rows,"ejecutivo_solicitante",r=>r.costo_promotores),clp);
+
+  const byDate={};
+  rows.forEach(r=>{if(r.fecha_inicio) byDate[r.fecha_inicio]=(byDate[r.fecha_inicio]||0)+1});
+  const ds=Object.keys(byDate).sort();
+  const mx=Math.max(1,...Object.values(byDate));
+  document.getElementById("ch-tl").innerHTML = ds.length ? ds.map(d=>
+    `<div title="${d}: ${byDate[d]} actividad(es)">
+       <span style="font-size:10px;color:var(--muted);font-weight:600">${byDate[d]}</span>
+       <div class="b" style="height:${(byDate[d]/mx*88).toFixed(0)}px"></div>
+       <span class="d">${d.slice(5)}</span></div>`).join("")
+    : '<div style="color:var(--muted);font-size:12.5px">Sin fechas de inicio</div>';
+
+  document.getElementById("thead").innerHTML=COLS.map(c=>
+    `<th data-k="${c[0]}">${c[1]}${sortK===c[0]?(sortD>0?" ▲":" ▼"):""}</th>`).join("");
+  document.querySelectorAll("#thead th").forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k; if(sortK===k) sortD=-sortD; else {sortK=k;sortD=1;} render();
+  });
+
+  sortedRows=[...rows].sort((a,b)=>{
+    let x=a[sortK],y=b[sortK];
+    if(x===null||x===undefined)x=""; if(y===null||y===undefined)y="";
+    if(typeof x==="number"&&typeof y==="number") return (x-y)*sortD;
+    return String(x).localeCompare(String(y),"es")*sortD;
+  });
+
+  document.getElementById("tbody").innerHTML=sortedRows.map(r=>"<tr>"+COLS.map(c=>{
+    const v=r[c[0]];
+    if(c[2]==="tag") return `<td><span class="tag t-${v}">${v}</span></td>`;
+    if(c[2]==="clp") return `<td class="num">${clp(v)}</td>`;
+    if(c[2]==="n")   return `<td class="num">${nm(v)}</td>`;
+    if(c[2]==="obs") return `<td class="obs">${(v||"").replace(/</g,"&lt;")}</td>`;
+    return `<td>${v===null||v===undefined||v===""?"—":String(v).replace(/</g,"&lt;")}</td>`;
+  }).join("")+"</tr>").join("");
+
+  document.getElementById("cnt").textContent=`(${acts} de ${R.length})`;
+  document.getElementById("empty").style.display=acts?"none":"block";
+}
+
+/* ================= descarga .xlsx (sin librerías externas) ================= */
+const CRC_T=(()=>{const t=new Uint32Array(256);
+  for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}
+  return t})();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC_T[(c^u8[i])&0xFF]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+const ENC=new TextEncoder();
+
+function zipStore(files){
+  const parts=[],central=[];let off=0;
+  const d=new Date();
+  const time=((d.getHours()<<11)|(d.getMinutes()<<5)|(d.getSeconds()>>1))&0xFFFF;
+  const date=(((d.getFullYear()-1980)<<9)|((d.getMonth()+1)<<5)|d.getDate())&0xFFFF;
+  for(const f of files){
+    const name=ENC.encode(f.name), data=f.data, crc=crc32(data);
+    const lh=new DataView(new ArrayBuffer(30));
+    lh.setUint32(0,0x04034b50,true); lh.setUint16(4,20,true); lh.setUint16(6,0x0800,true);
+    lh.setUint16(8,0,true); lh.setUint16(10,time,true); lh.setUint16(12,date,true);
+    lh.setUint32(14,crc,true); lh.setUint32(18,data.length,true); lh.setUint32(22,data.length,true);
+    lh.setUint16(26,name.length,true); lh.setUint16(28,0,true);
+    parts.push(new Uint8Array(lh.buffer),name,data);
+    const ch=new DataView(new ArrayBuffer(46));
+    ch.setUint32(0,0x02014b50,true); ch.setUint16(4,20,true); ch.setUint16(6,20,true);
+    ch.setUint16(8,0x0800,true); ch.setUint16(10,0,true); ch.setUint16(12,time,true); ch.setUint16(14,date,true);
+    ch.setUint32(16,crc,true); ch.setUint32(20,data.length,true); ch.setUint32(24,data.length,true);
+    ch.setUint16(28,name.length,true); ch.setUint16(30,0,true); ch.setUint16(32,0,true);
+    ch.setUint16(34,0,true); ch.setUint16(36,0,true); ch.setUint32(38,0,true); ch.setUint32(42,off,true);
+    central.push(new Uint8Array(ch.buffer),name);
+    off += 30+name.length+data.length;
+  }
+  let cSize=0; central.forEach(p=>cSize+=p.length);
+  const eo=new DataView(new ArrayBuffer(22));
+  eo.setUint32(0,0x06054b50,true); eo.setUint16(4,0,true); eo.setUint16(6,0,true);
+  eo.setUint16(8,files.length,true); eo.setUint16(10,files.length,true);
+  eo.setUint32(12,cSize,true); eo.setUint32(16,off,true); eo.setUint16(20,0,true);
+  return new Blob(parts.concat(central,[new Uint8Array(eo.buffer)]),
+    {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+
+const xesc = s => String(s).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,"")
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+function colName(n){let s="";while(n>0){const m=(n-1)%26;s=String.fromCharCode(65+m)+s;n=(n-m-1)/26}return s}
+function serial(iso){const p=iso.split("-").map(Number);
+  return Math.round((Date.UTC(p[0],p[1]-1,p[2])-Date.UTC(1899,11,30))/86400000)}
+
+const XML_HEAD = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+
+function buildSheet(rows){
+  const nC=COLS.length, nR=rows.length+1, ref="A1:"+colName(nC)+nR;
+  let x = XML_HEAD +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+
+    '<dimension ref="'+ref+'"/>'+
+    '<sheetViews><sheetView tabSelected="1" workbookViewId="0">'+
+    '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/>'+
+    '</sheetView></sheetViews><sheetFormatPr defaultRowHeight="15"/><cols>';
+  COLS.forEach((c,i)=>{ x+='<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+c[3]+'" customWidth="1"/>' });
+  x+='</cols><sheetData><row r="1" ht="30" customHeight="1">';
+  COLS.forEach((c,i)=>{ x+='<c r="'+colName(i+1)+'1" s="1" t="inlineStr"><is><t>'+xesc(c[1])+'</t></is></c>' });
+  x+='</row>';
+  rows.forEach((r,ri)=>{
+    const rn=ri+2; x+='<row r="'+rn+'">';
+    COLS.forEach((c,i)=>{
+      const v=r[c[0]], ref2=colName(i+1)+rn;
+      if(v===null||v===undefined||v==="") return;
+      if(c[2]==="clp") x+='<c r="'+ref2+'" s="2"><v>'+Number(v)+'</v></c>';
+      else if(c[2]==="n") x+='<c r="'+ref2+'"><v>'+Number(v)+'</v></c>';
+      else if(c[2]==="d") x+='<c r="'+ref2+'" s="3"><v>'+serial(String(v))+'</v></c>';
+      else x+='<c r="'+ref2+'" s="'+(c[2]==="obs"?4:0)+'" t="inlineStr"><is><t>'+xesc(v)+'</t></is></c>';
+    });
+    x+='</row>';
+  });
+  x+='</sheetData><autoFilter ref="'+ref+'"/></worksheet>';
+  return x;
+}
+
+function buildResumen(rows){
+  const blocks=[["Mes","mes"],["Ejecutivo","ejecutivo_solicitante"],["Cliente","cliente"],
+                ["Tipo","tipo"],["Cadena","cadena"],["Región","region"]];
+  const out=[];
+  out.push(["RESUMEN — ACTIVACIONES Y DEGUSTACIONES",null,null,null]);
+  out.push(["Filtro aplicado: "+(descFiltros()||"ninguno")+"   |   "+rows.length+" actividades",null,null,null]);
+  out.push([null,null,null,null]);
+  blocks.forEach(b=>{
+    out.push(["POR "+b[0].toUpperCase(),null,null,null]);
+    out.push(["Categoría","Actividades","Promotores x turno","Costo promotores"]);
+    agg(rows,b[1]).forEach(([k])=>{
+      const g=rows.filter(r=>(r[b[1]]||"(sin dato)")===k);
+      out.push([k,g.length,g.reduce((s,r)=>s+r.prom_turno,0),g.reduce((s,r)=>s+r.costo_promotores,0)]);
+    });
+    out.push([null,null,null,null]);
+  });
+  let x = XML_HEAD +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+
+    '<dimension ref="A1:D'+out.length+'"/><sheetViews><sheetView workbookViewId="0"/></sheetViews>'+
+    '<sheetFormatPr defaultRowHeight="15"/><cols>'+
+    '<col min="1" max="1" width="34" customWidth="1"/><col min="2" max="2" width="13" customWidth="1"/>'+
+    '<col min="3" max="3" width="20" customWidth="1"/><col min="4" max="4" width="19" customWidth="1"/>'+
+    '</cols><sheetData>';
+  out.forEach((row,ri)=>{
+    const rn=ri+1; x+='<row r="'+rn+'">';
+    row.forEach((v,i)=>{
+      if(v===null||v===undefined||v==="") return;
+      const ref=colName(i+1)+rn;
+      const esTitulo = typeof v==="string" && (v.startsWith("POR ")||v.startsWith("RESUMEN"));
+      const esCab = typeof v==="string" && (v==="Categoría");
+      if(typeof v==="number") x+='<c r="'+ref+'" s="'+(i===3?2:0)+'"><v>'+v+'</v></c>';
+      else x+='<c r="'+ref+'" s="'+(esTitulo?5:(esCab||row[1]==="Actividades"?6:0))+'" t="inlineStr"><is><t>'+xesc(v)+'</t></is></c>';
+    });
+    x+='</row>';
+  });
+  x+='</sheetData></worksheet>';
+  return x;
+}
+
+const STYLES = XML_HEAD +
+'<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">'+
+'<numFmts count="2">'+
+  '<numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0"/>'+
+  '<numFmt numFmtId="165" formatCode="dd\\-mm\\-yyyy"/>'+
+'</numFmts>'+
+'<fonts count="3">'+
+  '<font><sz val="11"/><name val="Calibri"/></font>'+
+  '<font><b/><color rgb="FFFFFFFF"/><sz val="11"/><name val="Calibri"/></font>'+
+  '<font><b/><sz val="11"/><name val="Calibri"/></font>'+
+'</fonts>'+
+'<fills count="3">'+
+  '<fill><patternFill patternType="none"/></fill>'+
+  '<fill><patternFill patternType="gray125"/></fill>'+
+  '<fill><patternFill patternType="solid"><fgColor rgb="FF1F4E79"/><bgColor indexed="64"/></patternFill></fill>'+
+'</fills>'+
+'<borders count="1"><border/></borders>'+
+'<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'+
+'<cellXfs count="7">'+
+  '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'+
+  '<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf>'+
+  '<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>'+
+  '<xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyAlignment="1"><alignment horizontal="center"/></xf>'+
+  '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0" applyAlignment="1"><alignment vertical="top" wrapText="1"/></xf>'+
+  '<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/>'+
+  '<xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/>'+
+'</cellXfs></styleSheet>';
+
+function descFiltros(){
+  const p=[];
+  if(F.mes)p.push("Mes "+mesLabel(F.mes)); if(F.eje)p.push(F.eje); if(F.cli)p.push(F.cli);
+  if(F.tipo)p.push(F.tipo); if(F.cad)p.push(F.cad); if(F.reg)p.push(F.reg);
+  if(F.q)p.push('buscar "'+F.q+'"');
+  return p.join(" · ");
+}
+
+function descargarXlsx(){
+  const rows=sortedRows;
+  if(!rows.length){ toast("No hay filas para exportar."); return; }
+
+  const files=[
+    {name:"[Content_Types].xml", data:ENC.encode(XML_HEAD+
+      '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'+
+      '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'+
+      '<Default Extension="xml" ContentType="application/xml"/>'+
+      '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'+
+      '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'+
+      '<Override PartName="/xl/worksheets/sheet2.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'+
+      '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+
+      '</Types>')},
+    {name:"_rels/.rels", data:ENC.encode(XML_HEAD+
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>'+
+      '</Relationships>')},
+    {name:"xl/workbook.xml", data:ENC.encode(XML_HEAD+
+      '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" '+
+      'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+
+      '<sheet name="Detalle" sheetId="1" r:id="rId1"/>'+
+      '<sheet name="Resumen" sheetId="2" r:id="rId2"/>'+
+      '</sheets></workbook>')},
+    {name:"xl/_rels/workbook.xml.rels", data:ENC.encode(XML_HEAD+
+      '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+
+      '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>'+
+      '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet2.xml"/>'+
+      '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>'+
+      '</Relationships>')},
+    {name:"xl/styles.xml", data:ENC.encode(STYLES)},
+    {name:"xl/worksheets/sheet1.xml", data:ENC.encode(buildSheet(rows))},
+    {name:"xl/worksheets/sheet2.xml", data:ENC.encode(buildResumen(rows))}
+  ];
+
+  const blob=zipStore(files);
+  const suf = F.mes ? F.mes : "todo";
+  const a=document.createElement("a");
+  const url=URL.createObjectURL(blob);
+  a.href=url; a.download="Activaciones_"+suf+".xlsx";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+  toast("Excel generado: "+rows.length+" filas");
+}
+
+let toastT=null;
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("on");
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("on"),2600);
+}
+
+document.getElementById("xlsx").onclick=()=>{
+  try { descargarXlsx(); }
+  catch(e){ toast("No se pudo generar el Excel: "+e.message); }
+};
+
+(async function main(){
+  document.getElementById("meta").textContent = "Cargando datos...";
+  if (!await cargarDatos()) return;
+  try {
+    prepararDatos();
+    llenarFiltros();
+    document.getElementById("meta").textContent =
+      `${R.length} actividades · ${DATA.meta.cobertura} · actualizado ${DATA.meta.generado}`;
+    document.getElementById("foot").textContent =
+      `Fuente: ${DATA.meta.fuente}. Los montos son los informados en cada correo de solicitud.`;
+    render();
+    if (!R.length) fatal("No hay registros",
+      "datos.json se cargó pero la lista de registros está vacía.");
+  } catch (e) {
+    fatal("No se pudo dibujar el dashboard", "Error: "+e.message+
+      "<br><br>Vuelve a ejecutar <code>Actualizar.ps1</code>. Si persiste, avísame y lo reviso.");
+  }
+})();
+</script>
+</body>
+</html>
