@@ -98,8 +98,9 @@ code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px
       <div class="sub" id="meta"></div>
     </div>
   </div>
-  <div style="display:flex;gap:8px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
     <button class="btn icon" id="tema" title="Cambiar entre fondo oscuro y claro">◐</button>
+    <button class="btn" id="recargar" title="Vuelve a leer datos.json y trae lo último publicado">↻ Actualizar</button>
     <button class="btn" id="reset">Limpiar filtros</button>
     <button class="btn primary" id="xlsx">Descargar Excel</button>
   </div>
@@ -111,8 +112,8 @@ code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px
   <div><label>Cliente</label><select id="f-cli"></select></div>
   <div><label>Tipo</label><select id="f-tipo"></select></div>
   <div><label>Cadena</label><select id="f-cad"></select></div>
-  <div><label>Región</label><select id="f-reg"></select></div>
-  <div><label>Buscar</label><input type="search" id="f-q" placeholder="local, campaña, PPTO..."></div>
+  <div><label>Tarifario</label><select id="f-tar" title="Pago por turno a la promotora"></select></div>
+  <div><label>Buscar</label><input type="search" id="f-q" placeholder="local, región, campaña, PPTO..."></div>
 </div>
 
 <div class="kpis" id="kpis"></div>
@@ -231,8 +232,10 @@ function prepararDatos(){
     r.mes = r.fecha_inicio ? r.fecha_inicio.slice(0,7) : (r.fecha_solicitud||"").slice(0,7);
     r.costo_promotores = (r.pago_por_turno||0) * (r.cant_promotores||0) * (r.turnos||0);
     r.prom_turno = (r.cant_promotores||0) * (r.turnos||0);
-    r._s = [r.nombre_local,r.campana,r.presupuesto,r.comuna,r.cliente,r.ejecutivo_solicitante,
-            r.solicitante_cliente,r.observaciones,r.asunto].join(" ").toLowerCase();
+    // la región sigue siendo buscable por texto, aunque ya no tenga filtro propio
+    r._s = [r.nombre_local,r.campana,r.presupuesto,r.comuna,r.region,r.cliente,
+            r.ejecutivo_solicitante,r.solicitante_cliente,r.tipo,r.cadena,
+            r.observaciones,r.asunto].join(" ").toLowerCase();
   });
 }
 
@@ -242,7 +245,8 @@ const mesLabel = m => m ? MESNOM[m.slice(5,7)]+" "+m.slice(0,4) : "(sin fecha)";
 const clp = v => (v===null||v===undefined||v==="") ? "—" : "$"+Number(v).toLocaleString("es-CL");
 const nm  = v => (v===null||v===undefined||v==="") ? "—" : Number(v).toLocaleString("es-CL");
 
-const F = {mes:"",eje:"",cli:"",tipo:"",cad:"",reg:"",q:""};
+const F = {mes:"",eje:"",cli:"",tipo:"",cad:"",tar:"",q:""};
+const SIN_PAGO = "__sin__";   // valor del filtro Tarifario para "sin pago informado"
 let sortK="fecha_inicio", sortD=1;
 
 function fill(id,key,label){
@@ -250,12 +254,28 @@ function fill(id,key,label){
   const vals=[...new Set(R.map(r=>r[key]).filter(v=>v!==null&&v!==""))].sort((a,b)=>String(a).localeCompare(String(b),"es"));
   sel.innerHTML='<option value="">Todos</option>'+vals.map(v=>`<option value="${v}">${label?label(v):v}</option>`).join("");
 }
-function llenarFiltros(){
-  fill("f-mes","mes",mesLabel); fill("f-eje","ejecutivo_solicitante"); fill("f-cli","cliente");
-  fill("f-tipo","tipo"); fill("f-cad","cadena"); fill("f-reg","region");
+// Tarifario: los valores reales de pago por turno, de menor a mayor.
+// Son puntos de tarifa concretos, así que conviene listarlos tal cual y no en rangos.
+function llenarTarifario(){
+  const sel  = document.getElementById("f-tar");
+  const vals = [...new Set(R.map(r=>r.pago_por_turno).filter(v=>v!==null&&v!==undefined))]
+               .sort((a,b)=>a-b);
+  const haySin = R.some(r=>r.pago_por_turno===null||r.pago_por_turno===undefined);
+  sel.innerHTML = '<option value="">Todos</option>'
+    + vals.map(v=>{
+        const n = R.filter(r=>Number(r.pago_por_turno)===Number(v)).length;
+        return `<option value="${v}">${clp(v)} (${n})</option>`;
+      }).join("")
+    + (haySin ? `<option value="${SIN_PAGO}">Sin pago informado</option>` : "");
 }
 
-const map={"f-mes":"mes","f-eje":"eje","f-cli":"cli","f-tipo":"tipo","f-cad":"cad","f-reg":"reg","f-q":"q"};
+function llenarFiltros(){
+  fill("f-mes","mes",mesLabel); fill("f-eje","ejecutivo_solicitante"); fill("f-cli","cliente");
+  fill("f-tipo","tipo"); fill("f-cad","cadena");
+  llenarTarifario();
+}
+
+const map={"f-mes":"mes","f-eje":"eje","f-cli":"cli","f-tipo":"tipo","f-cad":"cad","f-tar":"tar","f-q":"q"};
 Object.keys(map).forEach(id=>document.getElementById(id).addEventListener("input",e=>{
   F[map[id]]=e.target.value; render();
 }));
@@ -265,11 +285,59 @@ document.getElementById("reset").onclick=()=>{
   render();
 };
 
+// tras recargar datos las listas se rearman: hay que devolver los filtros elegidos,
+// descartando los que ya no existan en el dato nuevo
+function restaurarFiltros(){
+  Object.keys(map).forEach(id=>{
+    const el = document.getElementById(id), v = F[map[id]];
+    if (el.tagName === "SELECT") {
+      if ([...el.options].some(o=>o.value===v)) el.value = v;
+      else { el.value = ""; F[map[id]] = ""; }
+    } else el.value = v;
+  });
+}
+
+async function recargarDatos(){
+  const btn = document.getElementById("recargar");
+  const txt = btn.textContent;
+  btn.disabled = true; btn.textContent = "Actualizando...";
+  try {
+    const resp = await fetch("datos.json?v="+Date.now(), {cache:"no-store"});
+    if (!resp.ok) throw new Error("HTTP "+resp.status);
+    const nuevo = await resp.json();
+    if (!nuevo || !Array.isArray(nuevo.registros)) throw new Error("datos.json no tiene el formato esperado");
+
+    const antes = R.length, antesFecha = DATA.meta.generado;
+    DATA = nuevo; R = DATA.registros;
+    prepararDatos(); llenarFiltros(); restaurarFiltros();
+    document.getElementById("meta").textContent =
+      `${R.length} actividades · ${DATA.meta.cobertura} · actualizado ${DATA.meta.generado}`;
+    render();
+
+    const dif = R.length - antes;
+    if (dif > 0)       toast(`${dif} actividad(es) nueva(s) — ahora hay ${R.length}`);
+    else if (dif < 0)  toast(`Se quitaron ${-dif} — ahora hay ${R.length}`);
+    else if (antesFecha !== DATA.meta.generado) toast("Datos actualizados sin cambios en la cantidad");
+    else               toast(`Ya estabas al día — ${R.length} actividades`);
+  } catch (e) {
+    toast("No se pudo actualizar: "+e.message);
+  } finally {
+    btn.disabled = false; btn.textContent = txt;
+  }
+}
+
+function coincideTarifa(r){
+  if (!F.tar) return true;
+  const sinPago = (r.pago_por_turno===null||r.pago_por_turno===undefined);
+  if (F.tar === SIN_PAGO) return sinPago;
+  return !sinPago && Number(r.pago_por_turno) === Number(F.tar);
+}
+
 function filtered(){
   return R.filter(r=>
     (!F.mes||r.mes===F.mes) && (!F.eje||r.ejecutivo_solicitante===F.eje) &&
     (!F.cli||r.cliente===F.cli) && (!F.tipo||r.tipo===F.tipo) &&
-    (!F.cad||r.cadena===F.cad) && (!F.reg||r.region===F.reg) &&
+    (!F.cad||r.cadena===F.cad) && coincideTarifa(r) &&
     (!F.q||r._s.includes(F.q.toLowerCase()))
   );
 }
@@ -508,7 +576,8 @@ const STYLES = XML_HEAD +
 function descFiltros(){
   const p=[];
   if(F.mes)p.push("Mes "+mesLabel(F.mes)); if(F.eje)p.push(F.eje); if(F.cli)p.push(F.cli);
-  if(F.tipo)p.push(F.tipo); if(F.cad)p.push(F.cad); if(F.reg)p.push(F.reg);
+  if(F.tipo)p.push(F.tipo); if(F.cad)p.push(F.cad);
+  if(F.tar)p.push("Tarifa "+(F.tar===SIN_PAGO?"sin informar":clp(F.tar)));
   if(F.q)p.push('buscar "'+F.q+'"');
   return p.join(" · ");
 }
@@ -574,6 +643,12 @@ document.getElementById("xlsx").onclick=()=>{
   document.getElementById("meta").textContent = "Cargando datos...";
   if (!await cargarDatos()) return;
   try {
+    // el boton Actualizar solo aplica a la version web: en la local los datos
+    // van dentro del archivo, no hay nada que volver a pedir
+    const btnRec = document.getElementById("recargar");
+    if (EMBEDDED) btnRec.style.display = "none";
+    else btnRec.onclick = recargarDatos;
+
     prepararDatos();
     llenarFiltros();
     document.getElementById("meta").textContent =
