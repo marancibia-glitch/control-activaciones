@@ -3503,6 +3503,33 @@
                           "observaciones":  "Correo procesado con retraso (recuperado desde una respuesta del hilo). Producto: jamÃ³n acaramelado Sopraval, compra directa en el local. Counter y uniforme los lleva Sell-Out/logÃ­stica.",
                           "msg_id":  "1a01709257dae0b2",
                           "asunto":  "degustacion miercoles19- Isabel Gonzalez"
+                      },
+                      {
+                          "id":  "2026-08-130",
+                          "fecha_solicitud":  "2026-08-28",
+                          "ejecutivo_solicitante":  "Mauricio Saavedra",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "MOSU26202608006",
+                          "cliente":  "Mondelez",
+                          "campana":  "Ritz / Club Social",
+                          "tipo":  "Activación",
+                          "cadena":  "Walmart",
+                          "nombre_local":  "Salas Walmart (cantidad no especificada en el correo)",
+                          "comuna":  "",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  null,
+                          "fecha_termino":  null,
+                          "horario":  "Horario supermercados",
+                          "duracion_horas":  null,
+                          "cant_promotores":  1,
+                          "turnos":  4,
+                          "pago_por_turno":  29000,
+                          "compra_producto":  null,
+                          "fondo_insumos":  null,
+                          "gestion_counter":  null,
+                          "observaciones":  "Activación en salas Walmart, con actividad en PDV (counter + degustación) y tras cajas en algunas salas. 1 promotora por PDV, 4 días en total. Stand 2x2 lo monta equipo interno (Cesar Chamorro / Alberto Figueroa). Poleras y counters llegan el lunes a Los Alpes; degustación llega el lunes a Lo Ruiz. Compra de dips guacamole BUKA: 240 unidades (8 por fin de semana por sala), máx. $2.500 c/u. Capacitación por coordinar con Trade. PENDIENTE: fechas exactas de inicio/término y cantidad de locales/PDV.",
+                          "msg_id":  "1a048fd89c5baab7",
+                          "asunto":  "ACTIVACIÓN RITZ/CS WM"
                       }
                   ]
 }
