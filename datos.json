@@ -1,8 +1,8 @@
 ﻿{
     "meta":  {
-                 "generado":  "2026-08-28",
+                 "generado":  "2026-08-30",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-08-28",
+                 "cobertura":  "2026-08-06 al 2026-08-30",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -254,13 +254,13 @@
                           "fecha_termino":  "2026-09-06",
                           "horario":  "Turnos AM y PM",
                           "duracion_horas":  null,
-                          "cant_promotores":  2,
+                          "cant_promotores":  1,
                           "turnos":  2,
                           "pago_por_turno":  null,
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Segunda fecha de la campaña Wyn. Pago por turno no informado en el correo.",
+                          "observaciones":  "Segunda fecha de la campaña Wyn. Pago por turno no informado en el correo. CORREGIDO 27/08: solo 1 promotora (no 2) para el fin de semana 05-06/09 en Jumbo Maipú, debe ir con chaqueta roja; se requieren los 2 acrílicos del mueble operativos.",
                           "msg_id":  "19fec55327429c93",
                           "asunto":  "Activación WYN JUMBO_ COMENZANDO 15-16 AGOSTO"
                       },
@@ -2069,7 +2069,7 @@
                           "compra_producto":  null,
                           "fondo_insumos":  null,
                           "gestion_counter":  null,
-                          "observaciones":  "PENDIENTE: falta detalle por sala (fechas exactas, promotoras, pagos), viene en 2 calendarios Excel adjuntos (\u0027Promotoría y degustación\u0027 y \u0027Tras Caja\u0027, 20 salas WM/Jumbo). Dos PPTO: Walmart KHSU28202608001, Cencosud KHSU28202607011. Campaña de 2 fines de semana de septiembre, uniforme de huaso. Retiro de producto coordinado antes del 02/09. Prefijo de cliente nuevo: KHSU = Kraft Heinz. ACTUALIZADO 27/08: calendarios definitivos cargados; llegada a bodega el 01/09 de 50 counters de degustación, 56 bandejas colgantes (27 faltantes por resolver), 170 chapitas y mini parantes (16 Jumbo + 41 Sisa Ley) desde Grupo Experta; 72 franjas tricolor para uniformes llegan a Los Alpes el 28/08. Sigue pendiente el detalle de promotoras/pagos por sala (en los Excel adjuntos, no legibles por este proceso). ACTUALIZADO 27/08: resuelto el tema de las 27 bandejas colgantes faltantes (son plásticas acrílicas graficadas, no metálicas); llegan a bodega el 02/09 en horario PM desde proveedor Grupo Experta.",
+                          "observaciones":  "PENDIENTE: falta detalle por sala (fechas exactas, promotoras, pagos), viene en 2 calendarios Excel adjuntos (\u0027Promotoría y degustación\u0027 y \u0027Tras Caja\u0027, 20 salas WM/Jumbo). Dos PPTO: Walmart KHSU28202608001, Cencosud KHSU28202607011. Campaña de 2 fines de semana de septiembre, uniforme de huaso. Retiro de producto coordinado antes del 02/09. Prefijo de cliente nuevo: KHSU = Kraft Heinz. ACTUALIZADO 27/08: calendarios definitivos cargados; llegada a bodega el 01/09 de 50 counters de degustación, 56 bandejas colgantes (27 faltantes por resolver), 170 chapitas y mini parantes (16 Jumbo + 41 Sisa Ley) desde Grupo Experta; 72 franjas tricolor para uniformes llegan a Los Alpes el 28/08. Sigue pendiente el detalle de promotoras/pagos por sala (en los Excel adjuntos, no legibles por este proceso). ACTUALIZADO 27/08: resuelto el tema de las 27 bandejas colgantes faltantes (son plásticas acrílicas graficadas, no metálicas); llegan a bodega el 02/09 en horario PM desde proveedor Grupo Experta. ACTUALIZADO 30/08: se confirma que las promotoras compran las galletas para degustar como siempre (fondo por rendir a cargo de Trade); se recibieron modificaciones finales de salas el viernes 28/08, calendarios reenviados actualizados.",
                           "msg_id":  "1a03a722b569c5ea",
                           "asunto":  "ACTIVACIÓN KRAFT_FIESTAS PATRIAS _COMENZANDO 05 SEPTIEMBRE"
                       },
@@ -3530,6 +3530,33 @@
                           "observaciones":  "Activación en salas Walmart, con actividad en PDV (counter + degustación) y tras cajas en algunas salas. 1 promotora por PDV, 4 días en total. Stand 2x2 lo monta equipo interno (Cesar Chamorro / Alberto Figueroa). Poleras y counters llegan el lunes a Los Alpes; degustación llega el lunes a Lo Ruiz. Compra de dips guacamole BUKA: 240 unidades (8 por fin de semana por sala), máx. $2.500 c/u. Capacitación por coordinar con Trade. PENDIENTE: fechas exactas de inicio/término y cantidad de locales/PDV.",
                           "msg_id":  "1a048fd89c5baab7",
                           "asunto":  "ACTIVACIÓN RITZ/CS WM"
+                      },
+                      {
+                          "id":  "2026-08-131",
+                          "fecha_solicitud":  "2026-08-28",
+                          "ejecutivo_solicitante":  "Catalina León",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "UCSU31202607005",
+                          "cliente":  "Unilever Chile",
+                          "campana":  "Dove Derma Care Anti Caída",
+                          "tipo":  "Activación",
+                          "cadena":  "Farmacias (Cruz Verde y Preunic)",
+                          "nombre_local":  "Varias salas Cruz Verde y Preunic (según programa adjunto)",
+                          "comuna":  "Varias",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  null,
+                          "fecha_termino":  null,
+                          "horario":  "",
+                          "duracion_horas":  null,
+                          "cant_promotores":  null,
+                          "turnos":  null,
+                          "pago_por_turno":  40000,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "PENDIENTE: cantidad de promotoras y fechas exactas por sala en programa adjunto (Google Sheet no accesible por este proceso); se solicitó a Cruz Verde el enrolamiento del equipo. Perfil promotora: Pro. Uniforme blanco Dove con pañuelo morado, lanyard y credencial. Materiales: pendón y tester de serum línea Anti Caída, sampling de sachets Dove Defy + flyer. Dinámica: concurso vía WhatsApp por kit de productos Dove. Recepción de material en agencia; uniformes llegan el martes AM, capacitación y retiro de material martes PM. Cadenas de farmacia se irán confirmando en el mismo hilo.",
+                          "msg_id":  "1a04967d6c0b0b54",
+                          "asunto":  "Detalle de activación Dove Dwell - Farmacias"
                       }
                   ]
 }
