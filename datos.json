@@ -1,8 +1,8 @@
 ﻿{
     "meta":  {
-                 "generado":  "2026-09-02",
+                 "generado":  "2026-09-03",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-09-02",
+                 "cobertura":  "2026-08-06 al 2026-09-03",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -4637,6 +4637,33 @@
                           "observaciones":  "Implementación de payloader PPA (ya en bodega desde el 19/08) y 7 mini cabeceras de MDF (Ladysoft) para cadenas regionales, coordinada por el equipo Trade (no es un evento con promotoras por turno como el resto de los registros; es instalación de material POP). N° PPTO nuevo (SOSU), prefijo no mapeado antes: cliente asignado provisionalmente como Ladysoft (fabricante mencionado de las mini cabeceras) a confirmar. Autorización SMU pendiente al momento del correo; cadenas regionales no requieren autorización formal. Inicio de implementación programado para el 01/09, pero se corrigió a partir del 02/09 en RM por retraso en el envío de la carta Gantt definitiva. Detalle de fechas por sala en Excel adjunto (Gantt), no accesible por este proceso.",
                           "msg_id":  "1a0451a4433e677f",
                           "asunto":  "Gantt implementación Payloader PPA + 7 Mini Cabeceras PSF"
+                      },
+                      {
+                          "id":  "2026-09-001",
+                          "fecha_solicitud":  "2026-09-02",
+                          "ejecutivo_solicitante":  "Catalina Leon",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "UEBU31202608001",
+                          "cliente":  "Unilever Chile",
+                          "campana":  "Feria de Salud Bucal Pepsodent Expert",
+                          "tipo":  "Activación",
+                          "cadena":  "Evento",
+                          "nombre_local":  "Hotel Radisson Blu Plaza El Bosque",
+                          "comuna":  "Las Condes",
+                          "region":  "Metropolitana",
+                          "fecha_inicio":  "2026-09-08",
+                          "fecha_termino":  "2026-09-08",
+                          "horario":  "Montaje 09:00 a 16:00, evento 20:15 a 22:00, desmontaje 22:00",
+                          "duracion_horas":  null,
+                          "cant_promotores":  2,
+                          "turnos":  1,
+                          "pago_por_turno":  null,
+                          "compra_producto":  null,
+                          "fondo_insumos":  null,
+                          "gestion_counter":  0,
+                          "observaciones":  "Feria/stand institucional (no supermercado). Staff: 1 anfitriona + 1 persona corpóreo (ratón MiniPep) + 1 supervisor + 4 logísticos para montaje/desmontaje. Pagos al equipo por confirmar con Alberto Figueroa Vidal (PENDIENTE). Materiales: counter Pepsodent Expert, pendón de eventos, 3 plintos, muela grande (Pentacrom, a retirar), corpóreo ratón MiniPep (retiro en Shake el 07/09), uniforme anfitriona (polera blanca, pantalón blanco, chaqueta azul Pepsodent, buscar en bodega). Prefijo de PPTO nuevo no mapeado antes: UEBU (Unilever, feria/eventos) - cliente asignado por marca Pepsodent.",
+                          "msg_id":  "1a06438452b9ebe1",
+                          "asunto":  "Feria de Salud Bucal Pepsodent Expert - 8 de septiembre"
                       }
                   ]
 }
