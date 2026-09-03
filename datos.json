@@ -4610,6 +4610,33 @@
                           "observaciones":  "Dirección Los Pimientos 708. Producto: Salchicha 1040014. Gestor Agrosuper Daniela Sánchez (+56 9 9451 0156). Counter y uniforme los lleva el gestor Agrosuper.",
                           "msg_id":  "1a063c938e28614f",
                           "asunto":  "RE: Degustación coquimbo - Carlos Eyzaguirre"
+                      },
+                      {
+                          "id":  "2026-08-171",
+                          "fecha_solicitud":  "2026-08-27",
+                          "ejecutivo_solicitante":  "Paula Muñoz",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "SOSU28202608018",
+                          "cliente":  "Ladysoft",
+                          "campana":  "Implementación Payloader PPA + Mini Cabeceras PSF",
+                          "tipo":  "Activación",
+                          "cadena":  "SMU y cadenas regionales",
+                          "nombre_local":  "Múltiples locales SMU (payloader) y cadenas regionales (mini cabeceras), detalle en Gantt adjunto",
+                          "comuna":  "",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  "2026-09-02",
+                          "fecha_termino":  null,
+                          "horario":  "",
+                          "duracion_horas":  null,
+                          "cant_promotores":  null,
+                          "turnos":  null,
+                          "pago_por_turno":  null,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "Implementación de payloader PPA (ya en bodega desde el 19/08) y 7 mini cabeceras de MDF (Ladysoft) para cadenas regionales, coordinada por el equipo Trade (no es un evento con promotoras por turno como el resto de los registros; es instalación de material POP). N° PPTO nuevo (SOSU), prefijo no mapeado antes: cliente asignado provisionalmente como Ladysoft (fabricante mencionado de las mini cabeceras) a confirmar. Autorización SMU pendiente al momento del correo; cadenas regionales no requieren autorización formal. Inicio de implementación programado para el 01/09, pero se corrigió a partir del 02/09 en RM por retraso en el envío de la carta Gantt definitiva. Detalle de fechas por sala en Excel adjunto (Gantt), no accesible por este proceso.",
+                          "msg_id":  "1a0451a4433e677f",
+                          "asunto":  "Gantt implementación Payloader PPA + 7 Mini Cabeceras PSF"
                       }
                   ]
 }
