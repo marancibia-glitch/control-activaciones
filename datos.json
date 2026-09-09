@@ -5719,6 +5719,33 @@
                           "observaciones":  "Dirección Miguel Ángel 1786. Gestor/Supervisor Agrosuper Felipe Saavedra (+56 9 4025 0198). Producto: Jamón Acaramelado Super Cerdo. Compra en el mismo local. Counter y uniforme: ingreso/retiro PDV por Sell-Out/logística.",
                           "msg_id":  "1a08786f810376a5",
                           "asunto":  "SOLICITUD DEGUSTACION SABADO 12-9 SUPER CERDO- Isabel Gonzalez"
+                      },
+                      {
+                          "id":  "2026-09-040",
+                          "fecha_solicitud":  "2026-09-09",
+                          "ejecutivo_solicitante":  "Legna Valiente",
+                          "solicitante_cliente":  "Isabel Gonzalez",
+                          "presupuesto":  "AGSU49202609038",
+                          "cliente":  "Agrosuper",
+                          "campana":  "Super Cerdo",
+                          "tipo":  "Degustación",
+                          "cadena":  "Canal Tradicional",
+                          "nombre_local":  "Salfra",
+                          "comuna":  "Chimbarongo",
+                          "region":  "O\u0027Higgins",
+                          "fecha_inicio":  "2026-09-11",
+                          "fecha_termino":  "2026-09-11",
+                          "horario":  "15:00 a 19:00 hrs",
+                          "duracion_horas":  4,
+                          "cant_promotores":  1,
+                          "turnos":  1,
+                          "pago_por_turno":  15000,
+                          "compra_producto":  20000,
+                          "fondo_insumos":  3000,
+                          "gestion_counter":  25000,
+                          "observaciones":  "Código local 3200229361. Dirección Romeral Afuera S/N. Producto: Chorizo y salchichas Super Cerdo. Compra en el mismo local. Counter y uniforme: retiro en sucursal Curicó (Longitudinal Sur 187), entrega pendiente de definir.",
+                          "msg_id":  "1a087d67a2999cc2",
+                          "asunto":  "Fw: Degustación curicó - Isabel Gonzalez"
                       }
                   ]
 }
