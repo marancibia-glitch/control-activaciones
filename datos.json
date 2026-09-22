@@ -20,7 +20,8 @@
                                            "KHSU":  "Kraft Heinz",
                                            "UNMU":  "Supreme (prefijo nuevo, confirmar razon social)",
                                            "PSEU":  "Krispy Kreme (prefijo nuevo, confirmar razon social)",
-                                           "ECSU":  "CCU (Embotelladoras Chilenas Unidas, prefijo nuevo)"
+                                           "ECSU":  "CCU (Embotelladoras Chilenas Unidas, prefijo nuevo)",
+                                           "BCPU":  "CCU (Bebidas CCU-PepsiCo, prefijo nuevo)"
                                        }
              },
     "registros":  [
@@ -7148,7 +7149,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Implementación de payloader (no es evento con promotoras por turno). Llegada de material a bodega 24/09 PM desde proveedor Ureta. Aprobación pendiente al momento del correo. Cliente/prefijo SOSU asignado provisionalmente como Softys por contexto de cuenta; marca del material es \"Jabones Elite\", a confirmar razón social si difiere. Detalle de fechas por sala en Gantt adjunto, no accesible por este proceso.",
+                          "observaciones":  "Implementación de payloader (no es evento con promotoras por turno). Llegada de material a bodega 24/09 PM desde proveedor Ureta. Aprobación pendiente al momento del correo. Cliente/prefijo SOSU asignado provisionalmente como Softys por contexto de cuenta; marca del material es \"Jabones Elite\", a confirmar razón social si difiere. Detalle de fechas por sala en Gantt adjunto, no accesible por este proceso. ACTUALIZADO 21/09: Sebastián Escobedo reenvió la Gantt corregida con fechas de RM y regiones (el primer envío venía sin fechas); detalle por sala en adjunto, no accesible por este proceso.",
                           "msg_id":  "1a0b083568e11ca0",
                           "asunto":  "Gantt Implementación Payloader Jabones Elite SMU_Comenzando 25/09"
                       },
@@ -7165,7 +7166,7 @@
                           "nombre_local":  "12 salas Unimarc (Región Metropolitana), detalle en Gantt",
                           "comuna":  "",
                           "region":  "Metropolitana",
-                          "fecha_inicio":  null,
+                          "fecha_inicio":  "2026-09-23",
                           "fecha_termino":  null,
                           "horario":  "",
                           "duracion_horas":  null,
@@ -7175,7 +7176,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso.",
+                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso. COMPLETADO 22/09: Catalina León confirma que la implementación comienza el 23/09 (aún esperando la autorización del cliente para partir); se pidió actualizar la Gantt.",
                           "msg_id":  "1a0a122197464ce8",
                           "asunto":  "Implementaciones CCU – Unimarc - Gatorlit Berries__ Payloader // Unimarc"
                       },
@@ -7202,9 +7203,36 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Evento de influencers en agencia creativa BBDO: test capilares y grabación de contenido para Dove Dwell. Elementos a llevar: silla del carrito Dove Dwell, mesa plegable blanca, capilógrafo grande, 1 tester nuevo, kit de limpieza, uniforme completo Dove Dwell. Considerar supervisor fijo. Pago PENDIENTE de validar con trade. Contactos: Sebastián Araneda y Alejandra Maldonado.",
+                          "observaciones":  "Evento de influencers en agencia creativa BBDO: test capilares y grabación de contenido para Dove Dwell. Elementos a llevar: silla del carrito Dove Dwell, mesa plegable blanca, capilógrafo grande, 1 tester nuevo, kit de limpieza, uniforme completo Dove Dwell. Considerar supervisor fijo. Pago PENDIENTE de validar con trade. Contactos: Sebastián Araneda y Alejandra Maldonado. ACTUALIZADO 22/09: logística adelantó el ingreso de los elementos a la agencia para el miércoles 23/09 a las 16:00 hrs (cargado en planificación).",
                           "msg_id":  "1a0ca052106c8e87",
                           "asunto":  "Evento influencers Dove Dwell - 24 de septiembre"
+                      },
+                      {
+                          "id":  "2026-09-095",
+                          "fecha_solicitud":  "2026-09-08",
+                          "ejecutivo_solicitante":  "Daniela Perera",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "BCPU27202609002",
+                          "cliente":  "CCU",
+                          "campana":  "Mini Cabeceras 7UP Pink",
+                          "tipo":  "Activación",
+                          "cadena":  "Lider",
+                          "nombre_local":  "24 salas Líder (Región Metropolitana), detalle en Gantt",
+                          "comuna":  "",
+                          "region":  "Metropolitana",
+                          "fecha_inicio":  "2026-10-09",
+                          "fecha_termino":  null,
+                          "horario":  "",
+                          "duracion_horas":  null,
+                          "cant_promotores":  null,
+                          "turnos":  null,
+                          "pago_por_turno":  null,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "Implementación de mini cabeceras (no es evento con promotoras por turno). Razón social: Bebidas CCU-PEPSICO. PPTO original BCPU27202609001 reemplazado el 10/09 por BCPU27202609002. Prefijo nuevo BCPU agregado a meta.clientes_por_ppto. ACTUALIZADO 22/09: Catalina León confirma inicio de implementación desde el 09/10, pendiente autorización del cliente; se pidió actualizar la Gantt.",
+                          "msg_id":  "1a08300386d18c8f",
+                          "asunto":  "Implementaciones CCU – Líder – 7UP Pink | Mini Cabeceras"
                       }
                   ]
 }
