@@ -1,8 +1,8 @@
 {
     "meta":  {
-                 "generado":  "2026-09-22",
+                 "generado":  "2026-09-23",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-09-22",
+                 "cobertura":  "2026-08-06 al 2026-09-23",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -3558,7 +3558,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "PENDIENTE: fechas y locales exactos en planilla Google Sheets no accesible por este proceso. Uniforme blanco Dove con pañuelo morado, lanyard y credencial. Sampling: sachets Dove Defy + flyer. Dinámica: concurso vía WhatsApp por kit de productos. Capacitación y retiro de materiales martes PM en agencia. ACTUALIZADO 31/08: se suman salas de Cruz Verde con carrito; Salcobrand y Fasa aún no confirmados por cliente. ACTUALIZADO 02/09: se aprobaron Salcobrand y Fasa, programa de fechas por sala actualizado en la planilla. Llegan 21 cajas de muestras Dove Defy a bodega el 10/09. Concurso: se sortea 1 kit de productos Dove por semana según calendario. ACTUALIZADO 21/09: Nycole Meza envio datos de promotoras para Semana 39 (detalle en Excel adjunto, no accesible por este proceso).",
+                          "observaciones":  "PENDIENTE: fechas y locales exactos en planilla Google Sheets no accesible por este proceso. Uniforme blanco Dove con pañuelo morado, lanyard y credencial. Sampling: sachets Dove Defy + flyer. Dinámica: concurso vía WhatsApp por kit de productos. Capacitación y retiro de materiales martes PM en agencia. ACTUALIZADO 31/08: se suman salas de Cruz Verde con carrito; Salcobrand y Fasa aún no confirmados por cliente. ACTUALIZADO 02/09: se aprobaron Salcobrand y Fasa, programa de fechas por sala actualizado en la planilla. Llegan 21 cajas de muestras Dove Defy a bodega el 10/09. Concurso: se sortea 1 kit de productos Dove por semana según calendario. ACTUALIZADO 21/09: Nycole Meza envio datos de promotoras para Semana 39 (detalle en Excel adjunto, no accesible por este proceso). ACTUALIZADO 22/09: Sebastián Escobedo asignó vehículos con conductor para el carro Dove Dwell por punto (ej. vehículo VRXZ-64 a Cruz Verde Andrés Bello 2447); detalle completo en el hilo.",
                           "msg_id":  "1a04967d6c0b0b54",
                           "asunto":  "Detalle de activación Dove Dwell - Farmacias"
                       },
@@ -7176,7 +7176,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso. COMPLETADO 22/09: Catalina León confirma que la implementación comienza el 23/09 (aún esperando la autorización del cliente para partir); se pidió actualizar la Gantt.",
+                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso. COMPLETADO 22/09: Catalina León confirma que la implementación comienza el 23/09 (aún esperando la autorización del cliente para partir); se pidió actualizar la Gantt. ACTUALIZADO 22/09: Catalina León envió la autorización del cliente (adjunta), la implementación puede comenzar el 23/09.",
                           "msg_id":  "1a0a122197464ce8",
                           "asunto":  "Implementaciones CCU – Unimarc - Gatorlit Berries__ Payloader // Unimarc"
                       },
@@ -7203,7 +7203,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Evento de influencers en agencia creativa BBDO: test capilares y grabación de contenido para Dove Dwell. Elementos a llevar: silla del carrito Dove Dwell, mesa plegable blanca, capilógrafo grande, 1 tester nuevo, kit de limpieza, uniforme completo Dove Dwell. Considerar supervisor fijo. Pago PENDIENTE de validar con trade. Contactos: Sebastián Araneda y Alejandra Maldonado. ACTUALIZADO 22/09: logística adelantó el ingreso de los elementos a la agencia para el miércoles 23/09 a las 16:00 hrs (cargado en planificación).",
+                          "observaciones":  "Evento de influencers en agencia creativa BBDO: test capilares y grabación de contenido para Dove Dwell. Elementos a llevar: silla del carrito Dove Dwell, mesa plegable blanca, capilógrafo grande, 1 tester nuevo, kit de limpieza, uniforme completo Dove Dwell. Considerar supervisor fijo. Pago PENDIENTE de validar con trade. Contactos: Sebastián Araneda y Alejandra Maldonado. ACTUALIZADO 22/09: logística adelantó el ingreso de los elementos a la agencia para el miércoles 23/09 a las 16:00 hrs (cargado en planificación). ACTUALIZADO 22/09: el envío de los elementos a la agencia debe ir a nombre de Valentina Diaz.",
                           "msg_id":  "1a0ca052106c8e87",
                           "asunto":  "Evento influencers Dove Dwell - 24 de septiembre"
                       },
