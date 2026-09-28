@@ -7801,6 +7801,33 @@
                           "observaciones":  "Implementación de material POP (no es evento con promotoras por turno). Gancheras llevan QR. Material llega a bodega martes 29/09 desde proveedor Ureta (SI pendiente). Inicio jueves 01/10; material de V Región se envía miércoles 30/09. Aprobación adjunta. Gantt con fechas enviado por Sebastián Escobedo el 28/09.",
                           "msg_id":  "1a0e80f6fcf45169",
                           "asunto":  "Gantt Implementación_Gancheras Cotidian Lady *JUMBO*_ Comenzando 01/10"
+                      },
+                      {
+                          "id":  "2026-09-117",
+                          "fecha_solicitud":  "2026-09-28",
+                          "ejecutivo_solicitante":  "Legna Valiente",
+                          "solicitante_cliente":  "Carlos Eyzaguirre",
+                          "presupuesto":  "AGSU49202609078",
+                          "cliente":  "Agrosuper",
+                          "campana":  "La Crianza - ReUnidos Preventas CT Stgo",
+                          "tipo":  "Degustación",
+                          "cadena":  "Evento",
+                          "nombre_local":  "Hotel Hilton Garden Inn Santiago Airport (Av. Américo Vespucio 1292)",
+                          "comuna":  "Pudahuel",
+                          "region":  "Metropolitana",
+                          "fecha_inicio":  "2026-10-01",
+                          "fecha_termino":  "2026-10-01",
+                          "horario":  "08:30 a 10:30 hrs (promotoras llegan 07:30 hrs)",
+                          "duracion_horas":  3,
+                          "cant_promotores":  3,
+                          "turnos":  1,
+                          "pago_por_turno":  31500,
+                          "compra_producto":  0,
+                          "fondo_insumos":  9000,
+                          "gestion_counter":  0,
+                          "observaciones":  "Canal Tradicional. Formato anfitriona, perfil superior al de degustaciones normales (Gianni Chávarry). Mínimo operacional 4 horas por promotora. Productos los entrega Agrosuper (no se compra producto). Fondo insumos $3.000 por promotora. Promotoras llevan cuchillos, tablas de corte e insumos; productos cortados y montados antes de la llegada de invitados. Llevar counters y los parantes de la actividad anterior en el Hilton Garden Inn, actualizados con la información de productos. Counters, parantes e implementación los ingresa y retira Sell-Out/logística.",
+                          "msg_id":  "1a0e95018b0cdaa2",
+                          "asunto":  "RE: ReUnidos: Preventas CT Stgo- Carlos Eyzaguirre"
                       }
                   ]
 }
