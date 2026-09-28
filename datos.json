@@ -1,8 +1,8 @@
 {
     "meta":  {
-                 "generado":  "2026-09-27",
+                 "generado":  "2026-09-28",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-09-27",
+                 "cobertura":  "2026-08-06 al 2026-09-28",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -7393,7 +7393,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Prefijo nuevo KCSU: cliente tomado del asunto (Kimberly Clark), confirmar razón social. Implementación de material POP (no es evento con promotoras por turno): kit de flejeras + cenefas + lateral + exhibidor payloader, kits de 2 y 3 góndolas; flejeras llegan maquiladas. Recepción de material jueves 24/09; envío a regiones 25/09 AM. Prioridad día 1 por visita internacional: 3 salas en Providencia/Las Condes (Av. Francisco Bilbao 2851, Av. Cristóbal Colón 6071, Av. Presidente Kennedy 9001). Dudas con Romina Álvarez. Gantt con fechas pendiente.",
+                          "observaciones":  "Prefijo nuevo KCSU: cliente tomado del asunto (Kimberly Clark), confirmar razón social. Implementación de material POP (no es evento con promotoras por turno): kit de flejeras + cenefas + lateral + exhibidor payloader, kits de 2 y 3 góndolas; flejeras llegan maquiladas. Recepción de material jueves 24/09; envío a regiones 25/09 AM. Prioridad día 1 por visita internacional: 3 salas en Providencia/Las Condes (Av. Francisco Bilbao 2851, Av. Cristóbal Colón 6071, Av. Presidente Kennedy 9001). Dudas con Romina Álvarez. Gantt con fechas pendiente. ACTUALIZADO 28/09: Trade ya cargó en planificación; Benjamín Baeza envió Gantt actualizado para implementar antes del miércoles 30/09.",
                           "msg_id":  "1a0cf716282e02fc",
                           "asunto":  "IMPLEMENTACIÓN NACIONAL KIMBERLY CLARK - OCTUBRE"
                       },
@@ -7686,11 +7686,11 @@
                           "duracion_horas":  2,
                           "cant_promotores":  1,
                           "turnos":  1,
-                          "pago_por_turno":  null,
+                          "pago_por_turno":  30000,
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Clase de cocina con chef Miele para 20 invitados; entrega de 25 cajas open box con condimentos y rincón Gourmet con carrito negro (logística ingresa y retira). 1 supervisor fijo + 1 promotora de buen perfil, uniforme oficial rojo Gourmet. Pago PENDIENTE (validando con Trade/Mirko Parra). Pendiente validar medidas del carrito y cómo se entregan las cajas a Velvet. Aviso tardío: Trade (Nycole Meza) no había recibido la solicitud y busca cubrir el 26/09.",
+                          "observaciones":  "Clase de cocina con chef Miele para 20 invitados; entrega de 25 cajas open box con condimentos y rincón Gourmet con carrito negro (logística ingresa y retira). 1 supervisor fijo + 1 promotora de buen perfil, uniforme oficial rojo Gourmet. Pago PENDIENTE (validando con Trade/Mirko Parra). Pendiente validar medidas del carrito y cómo se entregan las cajas a Velvet. Aviso tardío: Trade (Nycole Meza) no había recibido la solicitud y busca cubrir el 26/09. COMPLETADO 28/09: pago promotora $30.000 y supervisor $20.000 (confirmado por Catalina León). Montaje entre 15:00 y 18:00; el cliente lleva las 25 cajas directo al local; Mirko envía uniforme; retiro del carrito miércoles 30/09 de 9 a 18 hrs.",
                           "msg_id":  "1a0da01fa423db43",
                           "asunto":  "Evento Gourmet x Velvet (29 de sept)"
                       },
@@ -7774,6 +7774,33 @@
                           "observaciones":  "Implementación de material POP (no es evento con promotoras por turno). Material llega a bodega miércoles 30/09 desde proveedor Ureta (SI1383). Inicio RM jueves 01/10; material de regiones se envía el mismo jueves. Aprobación pendiente. Gantt por completar con fechas.",
                           "msg_id":  "1a0d9e24ea351a64",
                           "asunto":  "Gantt Implementación_ Stopper y Vibrines Cotidian Silueta _Tottus_Comenzando 01/10"
+                      },
+                      {
+                          "id":  "2026-09-116",
+                          "fecha_solicitud":  "2026-09-28",
+                          "ejecutivo_solicitante":  "Paula Muñoz",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "SOSU28202609020",
+                          "cliente":  "Softys",
+                          "campana":  "Implementación Gancheras Cotidian Lady (con QR)",
+                          "tipo":  "Activación",
+                          "cadena":  "Jumbo",
+                          "nombre_local":  "10 salas Jumbo (RM y V Región), detalle en Gantt adjunto",
+                          "comuna":  "",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  "2026-10-01",
+                          "fecha_termino":  null,
+                          "horario":  "",
+                          "duracion_horas":  null,
+                          "cant_promotores":  null,
+                          "turnos":  null,
+                          "pago_por_turno":  null,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "Implementación de material POP (no es evento con promotoras por turno). Gancheras llevan QR. Material llega a bodega martes 29/09 desde proveedor Ureta (SI pendiente). Inicio jueves 01/10; material de V Región se envía miércoles 30/09. Aprobación adjunta. Gantt con fechas enviado por Sebastián Escobedo el 28/09.",
+                          "msg_id":  "1a0e80f6fcf45169",
+                          "asunto":  "Gantt Implementación_Gancheras Cotidian Lady *JUMBO*_ Comenzando 01/10"
                       }
                   ]
 }
