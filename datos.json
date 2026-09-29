@@ -1,8 +1,8 @@
 {
     "meta":  {
-                 "generado":  "2026-09-28",
+                 "generado":  "2026-09-29",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-09-28",
+                 "cobertura":  "2026-08-06 al 2026-09-29",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -7717,7 +7717,7 @@
                           "compra_producto":  null,
                           "fondo_insumos":  null,
                           "gestion_counter":  0,
-                          "observaciones":  "Fin de semana 1 de 2. Uniforme Kraft (polera azul marino piqué + pechera estampada). Promotoras compran crackelets en sala (FXR aparte). Retiro de producto lunes 28/09; counters llegan a bodega 28/09 PM desde Experta. Gráfica Tottus Ley de degustaciones la ingresan las promotoras; parantes Tottus y uniformes los entrega Trade en Los Alpes. Capacitación por confirmar. PENDIENTE: salas, promotoras y pago por turno vienen en calendario Excel (no accesible por este proceso). ACTUALIZADO 25/09: calendario reenviado con ajuste de cantidades de garlic y chipotle.",
+                          "observaciones":  "Fin de semana 1 de 2. Uniforme Kraft (polera azul marino piqué + pechera estampada). Promotoras compran crackelets en sala (FXR aparte). Retiro de producto lunes 28/09; counters llegan a bodega 28/09 PM desde Experta. Gráfica Tottus Ley de degustaciones la ingresan las promotoras; parantes Tottus y uniformes los entrega Trade en Los Alpes. Capacitación por confirmar. PENDIENTE: salas, promotoras y pago por turno vienen en calendario Excel (no accesible por este proceso). ACTUALIZADO 25/09: calendario reenviado con ajuste de cantidades de garlic y chipotle. ACTUALIZADO 29/09: logística reenvió cantidades de producto actualizadas para el fin de semana 03-04/10 (en imagen adjunta).",
                           "msg_id":  "1a0cfe62a3a9879c",
                           "asunto":  "Activación Degustación Kraft Flavours_ 03-04 / 17-18 Octubre"
                       },
@@ -7828,6 +7828,33 @@
                           "observaciones":  "Canal Tradicional. Formato anfitriona, perfil superior al de degustaciones normales (Gianni Chávarry). Mínimo operacional 4 horas por promotora. Productos los entrega Agrosuper (no se compra producto). Fondo insumos $3.000 por promotora. Promotoras llevan cuchillos, tablas de corte e insumos; productos cortados y montados antes de la llegada de invitados. Llevar counters y los parantes de la actividad anterior en el Hilton Garden Inn, actualizados con la información de productos. Counters, parantes e implementación los ingresa y retira Sell-Out/logística.",
                           "msg_id":  "1a0e95018b0cdaa2",
                           "asunto":  "RE: ReUnidos: Preventas CT Stgo- Carlos Eyzaguirre"
+                      },
+                      {
+                          "id":  "2026-09-118",
+                          "fecha_solicitud":  "2026-09-29",
+                          "ejecutivo_solicitante":  "Legna Valiente",
+                          "solicitante_cliente":  "Isabel Gonzalez",
+                          "presupuesto":  "AGSU49202609079",
+                          "cliente":  "Agrosuper",
+                          "campana":  "La Crianza",
+                          "tipo":  "Degustación",
+                          "cadena":  "Canal Tradicional",
+                          "nombre_local":  "Supermercado Rimorens (Longitudinal Antiguo Sitio 5)",
+                          "comuna":  "San Francisco de Mostazal",
+                          "region":  "O\u0027Higgins",
+                          "fecha_inicio":  "2026-09-30",
+                          "fecha_termino":  "2026-09-30",
+                          "horario":  "10:00 a 16:00 hrs",
+                          "duracion_horas":  6,
+                          "cant_promotores":  1,
+                          "turnos":  1,
+                          "pago_por_turno":  22500,
+                          "compra_producto":  30000,
+                          "fondo_insumos":  4500,
+                          "gestion_counter":  25000,
+                          "observaciones":  "Código SAP 3200189302. Producto: Salchichas La Crianza (cód. 1040771), se compra en el mismo local; si sobra producto se deja en el local. Promotora lleva insumos. Counter, uniforme y parrilla se retiran en Sucursal Rancagua (Manuel Montt 4020, Barrio Industrial, 08:30 a 16:30 hrs), entrega Raúl Vergara (gestor Agrosuper, +56 9 9222 6603). Gestión: Paula Allimant / Valentina San Martín (acusó recibo 29/09).",
+                          "msg_id":  "1a0ed13f4d3c0182",
+                          "asunto":  "Fw: DEGUSTACION RIMORENS SN FCO 3200189302- Isabel Gonzalez"
                       }
                   ]
 }
