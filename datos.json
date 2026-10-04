@@ -1,8 +1,8 @@
 {
     "meta":  {
-                 "generado":  "2026-10-01",
+                 "generado":  "2026-10-04",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-10-01",
+                 "cobertura":  "2026-08-06 al 2026-10-03",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -7879,7 +7879,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  null,
                           "gestion_counter":  0,
-                          "observaciones":  "Debe ser Motion X. Entrega de sampling de sachet líquido (1 Wyn azul + 1 Wyn amarillo por persona) en estaciones de metro; equipo de 4 promotores simultáneos. Uniforme: polera de marca + polar azul o rojo (no amarillo) + jockey + tote bag + mochila con cenefa (6 sets ya existen, logística debe informar estado); pantalón y zapatos negros. Capacitación obligatoria con cliente martes 06/10 11:00 hrs. Logística: vehículo con chofer + 1 apoyo para abastecer cada punto. Llegada de muestras a bodega 02/10, 09/10 y 14/10. Horarios y estaciones en calendario PDF adjunto (no accesible por este proceso). COMPLETADO 30/09: Paula Muñoz confirma pago de $30.000 líquidos por día por promotor. ACTUALIZADO 29/09: calendario V3, se reemplaza Plaza Maipú por Metro Ñuñoa.",
+                          "observaciones":  "Debe ser Motion X. Entrega de sampling de sachet líquido (1 Wyn azul + 1 Wyn amarillo por persona) en estaciones de metro; equipo de 4 promotores simultáneos. Uniforme: polera de marca + polar azul o rojo (no amarillo) + jockey + tote bag + mochila con cenefa (6 sets ya existen, logística debe informar estado); pantalón y zapatos negros. Capacitación obligatoria con cliente martes 06/10 11:00 hrs. Logística: vehículo con chofer + 1 apoyo para abastecer cada punto. Llegada de muestras a bodega 02/10, 09/10 y 14/10. Horarios y estaciones en calendario PDF adjunto (no accesible por este proceso). COMPLETADO 30/09: Paula Muñoz confirma pago de $30.000 líquidos por día por promotor. ACTUALIZADO 29/09: calendario V3, se reemplaza Plaza Maipú por Metro Ñuñoa. ACTUALIZADO 02/10: el lunes 12/10 es feriado, el calendario se corre un día hacia adelante (fecha de término exacta en el calendario PDF, no accesible por este proceso).",
                           "msg_id":  "1a0ee4f55dfd5a79",
                           "asunto":  "Nueva Activación Sampling Metros _Bio/Wyn_Comenzando 07/10"
                       },
@@ -8168,17 +8168,44 @@
                           "region":  "Metropolitana",
                           "fecha_inicio":  "2026-10-05",
                           "fecha_termino":  "2026-10-11",
-                          "horario":  "Por confirmar",
-                          "duracion_horas":  null,
+                          "horario":  "10:00 a 20:00 hrs",
+                          "duracion_horas":  10,
                           "cant_promotores":  1,
                           "turnos":  7,
                           "pago_por_turno":  40000,
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Activación especial belleza. Dinámica: prueba de productos (óleo BR/UV, Sérum Dwell) y regalo de merch (Operaciones confirma stock). Uniforme blanco de siempre. Elementos: carrito Dwell y pendón (Operaciones debe enviar fotos/videos del estado de los carritos). PENDIENTE: horario por confirmar; cant_promotores asumido 1 (no informado).",
+                          "observaciones":  "Activación especial belleza. Dinámica: prueba de productos (óleo BR/UV, Sérum Dwell) y regalo de merch (Operaciones confirma stock). Uniforme blanco de siempre. Elementos: carrito Dwell y pendón (Operaciones debe enviar fotos/videos del estado de los carritos). cant_promotores asumido 1 (no informado). ACTUALIZADO 02/10: Catalina León confirma horario 10:00 a 20:00 hrs (ingresar el carro a las 08:30). Pendón y tester los lleva y devuelve la promotora; merch solo Dove capilar, aprox. 40 unds por día. Pide cuidar los carros (nuevos) y gestionar reparación del carro más dañado.",
                           "msg_id":  "1a0f8b3398b46c7d",
                           "asunto":  "Activación Especial Belleza Jumbo Portal La Dehesa"
+                      },
+                      {
+                          "id":  "2026-10-005",
+                          "fecha_solicitud":  "2026-10-02",
+                          "ejecutivo_solicitante":  "Legna Valiente",
+                          "solicitante_cliente":  "Isabel Gonzalez",
+                          "presupuesto":  "AGSU49202610005",
+                          "cliente":  "Agrosuper",
+                          "campana":  "Super Cerdo",
+                          "tipo":  "Degustación",
+                          "cadena":  "Canal Tradicional",
+                          "nombre_local":  "Almacén San José SPA",
+                          "comuna":  "Coyhaique",
+                          "region":  "Aysén",
+                          "fecha_inicio":  "2026-10-09",
+                          "fecha_termino":  "2026-10-09",
+                          "horario":  "17:00 a 21:00 hrs",
+                          "duracion_horas":  4,
+                          "cant_promotores":  1,
+                          "turnos":  1,
+                          "pago_por_turno":  15000,
+                          "compra_producto":  20000,
+                          "fondo_insumos":  3000,
+                          "gestion_counter":  25000,
+                          "observaciones":  "Tucapel Jiménez 46. Gestor Agrosuper Mauricio Soto. Productos: Jamón Pierna Acaramelado de Cerdo Super Cerdo (cód. 1040551) y Jamón Colonial Super Cerdo (cód. 1040591), se compran en el local. Counter y uniforme: retiro en sucursal por Sell-Out/trade (Av. General Baquedano 4980, 08:00 a 23:30 hrs, entrega Alex Barria). Región Aysén (no estaba en la lista de normalización).",
+                          "msg_id":  "1a0fdb99d59d5e01",
+                          "asunto":  "RV: Degustación Coyhaique- Isabel Gonzalez"
                       }
                   ]
 }
