@@ -1,8 +1,8 @@
 {
     "meta":  {
-                 "generado":  "2026-10-04",
+                 "generado":  "2026-10-05",
                  "fuente":  "Gmail marancibia@sell-out.cl - etiqueta Activaciones + bandeja de entrada",
-                 "cobertura":  "2026-08-06 al 2026-10-03",
+                 "cobertura":  "2026-08-06 al 2026-10-05",
                  "clientes_por_ppto":  {
                                            "AGSU":  "Agrosuper",
                                            "GOSU":  "Goudels",
@@ -7167,7 +7167,7 @@
                           "nombre_local":  "12 salas Unimarc (Región Metropolitana), detalle en Gantt",
                           "comuna":  "",
                           "region":  "Metropolitana",
-                          "fecha_inicio":  "2026-09-23",
+                          "fecha_inicio":  "2026-10-06",
                           "fecha_termino":  null,
                           "horario":  "",
                           "duracion_horas":  null,
@@ -7177,7 +7177,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso. COMPLETADO 22/09: Catalina León confirma que la implementación comienza el 23/09 (aún esperando la autorización del cliente para partir); se pidió actualizar la Gantt. ACTUALIZADO 22/09: Catalina León envió la autorización del cliente (adjunta), la implementación puede comenzar el 23/09.",
+                          "observaciones":  "Implementación de payloaders (no es evento con promotoras por turno). Razón social: Embotelladoras Chilenas Unidas. Estado al momento del correo original (14/09): en espera de recepción de material. N° PPTO nuevo (ECSU), prefijo no mapeado antes -\u003e agregado a meta.clientes_por_ppto como CCU. Gantt con fechas definitivas enviada 22/09 y cargada en planificación, detalle por sala en Excel adjunto, no accesible por este proceso. COMPLETADO 22/09: Catalina León confirma que la implementación comienza el 23/09 (aún esperando la autorización del cliente para partir); se pidió actualizar la Gantt. ACTUALIZADO 22/09: Catalina León envió la autorización del cliente (adjunta), la implementación puede comenzar el 23/09. ACTUALIZADO 05/10: Benjamin Baeza envía Gantt actualizada; los payloaders Gatorlit Berries se empiezan a implementar el 06/10 (se pide a Javiera Parraguez cargarlo en la planificación). Se ajusta fecha_inicio de 23/09 a 06/10.",
                           "msg_id":  "1a0a122197464ce8",
                           "asunto":  "Implementaciones CCU – Unimarc - Gatorlit Berries__ Payloader // Unimarc"
                       },
