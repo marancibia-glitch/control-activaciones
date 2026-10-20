@@ -135,7 +135,8 @@ table.sum tr.sel{background:var(--accent-soft)}
 </header>
 
 <div class="panel filters">
-  <div><label>Semana</label><select id="f-sem" title="Semanas de lunes a domingo, según fecha de inicio"></select></div>
+  <div><label>Semana desde</label><select id="f-sem1" title="Primera semana del rango (lunes a domingo, según fecha de inicio)"></select></div>
+  <div><label>Semana hasta</label><select id="f-sem2" title="Última semana del rango (inclusive)"></select></div>
   <div><label>Mes</label><select id="f-mes"></select></div>
   <div><label>Ejecutivo solicitante</label><select id="f-eje"></select></div>
   <div><label>Cliente</label><select id="f-cli"></select></div>
@@ -322,7 +323,33 @@ const DIAS = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
 // todas las semanas entre la primera y la última, incluidas las que no tienen actividades
 function semanasEntre(a,b){ const out=[]; for(let l=a; l<=b; l=sumarDias(l,7)) out.push(l); return out; }
 
-const F = {sem:"",mes:"",eje:"",cli:"",tipo:"",cad:"",tar:"",q:""};
+const F = {sem1:"",sem2:"",mes:"",eje:"",cli:"",tipo:"",cad:"",tar:"",q:""};
+
+/* --- rango de semanas: sem1 = desde, sem2 = hasta, ambos guardan el lunes ---
+   Cualquiera de los dos puede ir vacío: significa "sin límite por ese lado". */
+function hayRango(){ return !!(F.sem1 || F.sem2); }
+function unaSemana(){ return !!(F.sem1 && F.sem2 && F.sem1 === F.sem2); }
+function enRango(l){
+  if (!l) return false;                       // registros sin fecha quedan fuera del rango
+  if (F.sem1 && l < F.sem1) return false;
+  if (F.sem2 && l > F.sem2) return false;
+  return true;
+}
+function sincronizarSemanas(){
+  document.getElementById("f-sem1").value = F.sem1;
+  document.getElementById("f-sem2").value = F.sem2;
+}
+// Si el "desde" queda después del "hasta", manda el campo que acabas de tocar
+// y el otro se arrastra, que es como se comportan los selectores de rango.
+// Sin argumento (clic en un gráfico) simplemente se ordenan.
+function normalizarSemanas(cambiado){
+  if (F.sem1 && F.sem2 && F.sem1 > F.sem2) {
+    if      (cambiado === "sem1") F.sem2 = F.sem1;
+    else if (cambiado === "sem2") F.sem1 = F.sem2;
+    else { const t = F.sem1; F.sem1 = F.sem2; F.sem2 = t; }
+  }
+  sincronizarSemanas();
+}
 const SIN_PAGO = "__sin__";   // valor del filtro Tarifario para "sin pago informado"
 let sortK="fecha_inicio", sortD=1;
 
@@ -346,14 +373,16 @@ function llenarTarifario(){
     + (haySin ? `<option value="${SIN_PAGO}">Sin pago informado</option>` : "");
 }
 
-// Semana: de la más reciente a la más antigua, con la cantidad de actividades
+// Semanas: de la más reciente a la más antigua, con la cantidad de actividades.
+// Las dos listas son iguales; cada una con su opción vacía de "sin límite".
 function llenarSemanas(){
-  const sel=document.getElementById("f-sem");
   const vals=[...new Set(R.map(r=>r.semana).filter(Boolean))].sort().reverse();
-  sel.innerHTML='<option value="">Todas</option>'+vals.map(l=>{
+  const opts=vals.map(l=>{
     const n=R.filter(r=>r.semana===l).length;
     return `<option value="${l}">${semLabel(l)}${l===HOY_LUNES?" (en curso)":""} (${n})</option>`;
   }).join("");
+  document.getElementById("f-sem1").innerHTML='<option value="">Desde la primera</option>'+opts;
+  document.getElementById("f-sem2").innerHTML='<option value="">Hasta la última</option>'+opts;
 }
 
 function llenarFiltros(){
@@ -363,9 +392,11 @@ function llenarFiltros(){
   llenarTarifario();
 }
 
-const map={"f-sem":"sem","f-mes":"mes","f-eje":"eje","f-cli":"cli","f-tipo":"tipo","f-cad":"cad","f-tar":"tar","f-q":"q"};
+const map={"f-sem1":"sem1","f-sem2":"sem2","f-mes":"mes","f-eje":"eje","f-cli":"cli","f-tipo":"tipo","f-cad":"cad","f-tar":"tar","f-q":"q"};
 Object.keys(map).forEach(id=>document.getElementById(id).addEventListener("input",e=>{
-  F[map[id]]=e.target.value; render();
+  F[map[id]]=e.target.value;
+  if (id==="f-sem1" || id==="f-sem2") normalizarSemanas(map[id]);
+  render();
 }));
 document.getElementById("reset").onclick=()=>{
   Object.keys(F).forEach(k=>F[k]="");
@@ -425,7 +456,7 @@ function coincideTarifa(r){
 // semanales, que muestran todas las semanas y resaltan la elegida)
 function filtered(sinSemana){
   return R.filter(r=>
-    (sinSemana||!F.sem||r.semana===F.sem) && (!F.mes||r.mes===F.mes) && (!F.eje||r.ejecutivo_solicitante===F.eje) &&
+    (sinSemana||!hayRango()||enRango(r.semana)) && (!F.mes||r.mes===F.mes) && (!F.eje||r.ejecutivo_solicitante===F.eje) &&
     (!F.cli||r.cliente===F.cli) && (!F.tipo||r.tipo===F.tipo) &&
     (!F.cad||r.cadena===F.cad) && coincideTarifa(r) &&
     (!F.q||r._s.includes(F.q.toLowerCase()))
@@ -467,13 +498,15 @@ function metricas(rows){
   };
 }
 
-// variación contra la semana anterior (con los mismos filtros)
-function delta(act, ant, fmt){
+// variación contra el período anterior del mismo largo (con los mismos filtros).
+// n = cuántas semanas tiene el rango elegido, para nombrar bien la comparación.
+function delta(act, ant, fmt, n){
+  const ref = (n && n > 1) ? `vs ${n} sem. previas` : "vs sem. anterior";
   const d = act-ant;
-  if (!ant && !act) return '<div class="d flat">= sin actividad ambas semanas</div>';
+  if (!ant && !act) return `<div class="d flat">= sin actividad en ambos períodos</div>`;
   const pct = ant ? " ("+(d>0?"+":"")+Math.round(d/ant*100)+"%)" : "";
   const cls = d>0?"up":d<0?"down":"flat", s = d>0?"▲ +":d<0?"▼ −":"= ";
-  return `<div class="d ${cls}">${s}${fmt(Math.abs(d))}${pct} vs sem. anterior</div>`;
+  return `<div class="d ${cls}">${s}${fmt(Math.abs(d))}${pct} ${ref}</div>`;
 }
 
 // rango de semanas a dibujar: continuo, sin saltarse semanas vacías
@@ -482,9 +515,20 @@ function rangoSemanas(base){
   return ls.length ? semanasEntre(ls[0], ls[ls.length-1]) : [];
 }
 
-function elegirSemana(l){
-  F.sem = (F.sem===l) ? "" : l;
-  document.getElementById("f-sem").value = F.sem;
+// Clic en una barra, fila o columna: deja el rango en esa sola semana.
+// Si ya estaba sola esa semana, vuelve a quitar el filtro.
+// Con Shift: extiende el rango hasta esa semana en vez de reemplazarlo.
+function elegirSemana(l, extender){
+  if (extender && hayRango()) {
+    if (F.sem1 && l < F.sem1)      F.sem1 = l;
+    else if (F.sem2 && l > F.sem2) F.sem2 = l;
+    else                           F.sem2 = l;
+  } else if (unaSemana() && F.sem1 === l) {
+    F.sem1 = ""; F.sem2 = "";
+  } else {
+    F.sem1 = l; F.sem2 = l;
+  }
+  normalizarSemanas();
   render();
 }
 
@@ -499,13 +543,16 @@ function render(){
   const sinPago=rows.filter(r=>r.pago_por_turno===null||r.pago_por_turno===undefined).length;
   const sinPpto=rows.filter(r=>!r.presupuesto).length;
 
-  // debajo de cada KPI: con una semana elegida, la variación vs la anterior;
-  // sin semana elegida, el promedio semanal del período
+  // debajo de cada KPI: con un rango elegido, la variación contra el período
+  // inmediatamente anterior del mismo largo; sin rango, el promedio semanal
+  const semSel = semanas.filter(enRango);
   let dA="",dP="",dC="",dCo="",dL="";
-  if (F.sem) {
-    const P=metricas(base.filter(r=>r.semana===sumarDias(F.sem,-7)));
-    dA=delta(M.acts,P.acts,nm); dP=delta(M.promTurno,P.promTurno,nm);
-    dC=delta(M.costo,P.costo,clp); dCo=delta(M.compra,P.compra,clp); dL=delta(M.locales,P.locales,nm);
+  if (hayRango() && semSel.length) {
+    const n = semSel.length;
+    const previas = semSel.map(l=>sumarDias(l,-7*n));
+    const P = metricas(base.filter(r=>previas.indexOf(r.semana)>=0));
+    dA=delta(M.acts,P.acts,nm,n); dP=delta(M.promTurno,P.promTurno,nm,n);
+    dC=delta(M.costo,P.costo,clp,n); dCo=delta(M.compra,P.compra,clp,n); dL=delta(M.locales,P.locales,nm,n);
   } else if (semanas.length) {
     const n=semanas.length, pr=v=>Math.round(v/n);
     dA=`<div class="h">${nm(pr(M.acts))} por semana · ${n} semanas</div>`;
@@ -533,7 +580,7 @@ function render(){
   const wk=document.getElementById("ch-wk");
   wk.innerHTML = semanas.length ? semanas.map(l=>{
     const g=porSem[l], m=metricas(g), h=v=>(v/mxA*130).toFixed(0);
-    return `<div data-l="${l}" class="${F.sem===l?"sel":""}" title="${semLabel(l)}: ${m.acts} actividad(es) — ${m.deg} degustación, ${m.act} activación, ${m.apo} apoyo">
+    return `<div data-l="${l}" class="${enRango(l)&&hayRango()?"sel":""}" title="${semLabel(l)}: ${m.acts} actividad(es) — ${m.deg} degustación, ${m.act} activación, ${m.apo} apoyo">
       <span class="c">${m.acts||""}</span>
       <span class="stack">
         <i style="height:${h(m.deg)}px;background:var(--deg)"></i><i style="height:${h(m.act)}px;background:var(--act)"></i><i style="height:${h(m.apo)}px;background:var(--apo)"></i>
@@ -546,12 +593,12 @@ function render(){
                    : v>=1e3 ? "$"+Math.round(v/1e3)+"k" : v ? "$"+v : "";
   const wkc=document.getElementById("ch-wkc");
   wkc.innerHTML = semanas.length ? semanas.map((l,i)=>
-    `<div data-l="${l}" class="${F.sem===l?"sel":""}" title="${semLabel(l)}: ${clp(costos[i])}">
+    `<div data-l="${l}" class="${enRango(l)&&hayRango()?"sel":""}" title="${semLabel(l)}: ${clp(costos[i])}">
       <span class="c">${corto(costos[i])}</span>
       <span class="stack"><i style="height:${(costos[i]/mxC*130).toFixed(0)}px;background:var(--c4)"></i></span>
       ${ejeX(l)}</div>`).join("")
     : '<div style="color:var(--muted);font-size:12.5px;cursor:default">Sin datos</div>';
-  [wk,wkc].forEach(el=>el.querySelectorAll("[data-l]").forEach(d=>d.onclick=()=>elegirSemana(d.dataset.l)));
+  [wk,wkc].forEach(el=>el.querySelectorAll("[data-l]").forEach(d=>d.onclick=ev=>elegirSemana(d.dataset.l, ev.shiftKey)));
   // que se vea la semana elegida (o la más reciente) si hay scroll horizontal
   [wk,wkc].forEach(el=>{ const s=el.querySelector(".sel");
     el.scrollLeft = s ? s.offsetLeft-el.offsetLeft-el.clientWidth/2 : el.scrollWidth; });
@@ -563,7 +610,7 @@ function render(){
   document.getElementById("sum-body").innerHTML = filasSem.length ? filasSem.map(({l,m,ant})=>{
     let d="—";
     if(ant!==null){ const x=m.acts-ant; d=`<span class="${x>0?"up":x<0?"down":"flat"}">${x>0?"+":""}${x}</span>`; }
-    return `<tr data-l="${l}" class="${F.sem===l?"sel":""}">
+    return `<tr data-l="${l}" class="${enRango(l)&&hayRango()?"sel":""}">
       <td><b>${semCorta(l)}</b>${l===HOY_LUNES?' <span class="now" style="color:var(--accent);font-size:10px;font-weight:700">EN CURSO</span>':''}</td>
       <td>${rangoSem(l)} ${sumarDias(l,3).slice(0,4)}</td>
       <td class="num"><b>${m.acts}</b></td><td class="num">${d}</td>
@@ -571,7 +618,7 @@ function render(){
       <td class="num">${nm(m.promTurno)}</td><td class="num">${clp(m.costo)}</td><td class="num">${clp(m.compra)}</td>
       <td class="num">${clp(m.insumos+m.counter)}</td><td class="num">${m.ppto}</td><td class="num">${m.locales}</td></tr>`;
   }).join("") : `<tr><td colspan="${SUMC.length}" class="empty">Sin datos</td></tr>`;
-  document.querySelectorAll("#sum-body tr[data-l]").forEach(tr=>tr.onclick=()=>elegirSemana(tr.dataset.l));
+  document.querySelectorAll("#sum-body tr[data-l]").forEach(tr=>tr.onclick=ev=>elegirSemana(tr.dataset.l, ev.shiftKey));
 
   /* --- mapa de calor ejecutivo × semana --- */
   const ejes=agg(base,"ejecutivo_solicitante").map(e=>e[0]);
@@ -579,11 +626,11 @@ function render(){
   const mxH=Math.max(1,...Object.values(cnt));
   const celda = n => n ? `<td class="h" style="background:color-mix(in srgb, var(--accent) ${Math.round(12+n/mxH*70)}%, transparent)">${n}</td>` : '<td class="h" style="color:var(--line)">·</td>';
   document.getElementById("heat").innerHTML = ejes.length ?
-    `<thead><tr><th style="cursor:default">Ejecutivo</th>${semanas.map(l=>`<th data-l="${l}" class="${F.sem===l?"sel":""}" title="${semLabel(l)}">${semCorta(l)}<br><span style="font-weight:500">${diaMes(l)}</span></th>`).join("")}<th style="cursor:default">Total</th></tr></thead><tbody>`+
+    `<thead><tr><th style="cursor:default">Ejecutivo</th>${semanas.map(l=>`<th data-l="${l}" class="${enRango(l)&&hayRango()?"sel":""}" title="${semLabel(l)}">${semCorta(l)}<br><span style="font-weight:500">${diaMes(l)}</span></th>`).join("")}<th style="cursor:default">Total</th></tr></thead><tbody>`+
     ejes.map(e=>`<tr><td>${e}</td>${semanas.map(l=>celda(cnt[e+"|"+l]||0)).join("")}<td class="h"><b>${semanas.reduce((s,l)=>s+(cnt[e+"|"+l]||0),0)}</b></td></tr>`).join("")+
     `<tr class="tot"><td>Total</td>${semanas.map(l=>`<td class="h">${porSem[l].length||"·"}</td>`).join("")}<td class="h">${base.filter(r=>r.semana).length}</td></tr></tbody>`
     : '<tbody><tr><td class="empty">Sin datos</td></tr></tbody>';
-  document.querySelectorAll("#heat th[data-l]").forEach(th=>th.onclick=()=>elegirSemana(th.dataset.l));
+  document.querySelectorAll("#heat th[data-l]").forEach(th=>th.onclick=ev=>elegirSemana(th.dataset.l, ev.shiftKey));
 
   bars(document.getElementById("ch-eje"),agg(rows,"ejecutivo_solicitante"),nm);
   bars(document.getElementById("ch-cli"),agg(rows,"cliente"),nm);
@@ -596,10 +643,14 @@ function render(){
   const porDia=[0,0,0,0,0,0,0];
   rows.forEach(r=>{ if(r.dia!==null) porDia[r.dia]++; });
   const mx=Math.max(1,...porDia);
-  document.getElementById("tl-tit").textContent = F.sem
-    ? "Actividades por día · "+semLabel(F.sem) : "Actividades por día de la semana (todas las semanas filtradas)";
+  // los días con fecha concreta solo tienen sentido si el rango es de una sola semana
+  document.getElementById("tl-tit").textContent = unaSemana()
+    ? "Actividades por día · "+semLabel(F.sem1)
+    : hayRango()
+      ? "Actividades por día de la semana · "+semSel.length+" semana(s) del rango"
+      : "Actividades por día de la semana (todas las semanas filtradas)";
   document.getElementById("ch-tl").innerHTML = rows.length ? porDia.map((n,i)=>{
-    const et = F.sem ? DIAS[i]+" "+diaMes(sumarDias(F.sem,i)) : DIAS[i];
+    const et = unaSemana() ? DIAS[i]+" "+diaMes(sumarDias(F.sem1,i)) : DIAS[i];
     return `<div title="${et}: ${n} actividad(es)">
        <span style="font-size:10.5px;color:var(--muted);font-weight:600">${n||""}</span>
        <div class="b" style="height:${(n/mx*88).toFixed(0)}px;${i>4?"background:var(--c3)":""}"></div>
@@ -782,7 +833,8 @@ const STYLES = XML_HEAD +
 
 function descFiltros(){
   const p=[];
-  if(F.sem)p.push(semLabel(F.sem));
+  if(unaSemana()) p.push(semLabel(F.sem1));
+  else if(hayRango()) p.push("Semanas "+(F.sem1?semCorta(F.sem1):"desde el inicio")+" a "+(F.sem2?semCorta(F.sem2):"la última"));
   if(F.mes)p.push("Mes "+mesLabel(F.mes)); if(F.eje)p.push(F.eje); if(F.cli)p.push(F.cli);
   if(F.tipo)p.push(F.tipo); if(F.cad)p.push(F.cad);
   if(F.tar)p.push("Tarifa "+(F.tar===SIN_PAGO?"sin informar":clp(F.tar)));
@@ -826,8 +878,10 @@ function descargarXlsx(){
   ];
 
   const blob=zipStore(files);
-  const suf = F.sem ? sumarDias(F.sem,3).slice(0,4)+"-S"+String(numSemana(F.sem)).padStart(2,"0")
-            : F.mes ? F.mes : "todas";
+  const sNom = l => "S"+String(numSemana(l)).padStart(2,"0");
+  const suf = unaSemana() ? sumarDias(F.sem1,3).slice(0,4)+"-"+sNom(F.sem1)
+            : hayRango()  ? (F.sem1?sNom(F.sem1):"ini")+"-a-"+(F.sem2?sNom(F.sem2):"fin")
+            : F.mes       ? F.mes : "todas";
   const a=document.createElement("a");
   const url=URL.createObjectURL(blob);
   a.href=url; a.download="Activaciones_semana_"+suf+".xlsx";
