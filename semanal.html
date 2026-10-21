@@ -287,6 +287,10 @@ function prepararDatos(){
     r.mes = r.fecha_inicio ? r.fecha_inicio.slice(0,7) : (r.fecha_solicitud||"").slice(0,7);
     r.costo_promotores = (r.pago_por_turno||0) * (r.cant_promotores||0) * (r.turnos||0);
     r.prom_turno = (r.cant_promotores||0) * (r.turnos||0);
+
+    // si falta cualquiera de los tres factores el costo NO es cero: es desconocido
+
+    r.costoIncompleto = !(Number(r.pago_por_turno)>0 && Number(r.cant_promotores)>0 && Number(r.turnos)>0);
     // semana = lunes de la semana (lunes a domingo) de la fecha de inicio
     const base = r.fecha_inicio || r.fecha_solicitud || "";
     r.semana = base ? lunesDe(base) : "";
@@ -541,6 +545,7 @@ function render(){
 
   const M=metricas(rows);
   const sinPago=rows.filter(r=>r.pago_por_turno===null||r.pago_por_turno===undefined).length;
+  const sinCosto=rows.filter(r=>r.costoIncompleto).length;
   const sinPpto=rows.filter(r=>!r.presupuesto).length;
 
   // debajo de cada KPI: con un rango elegido, la variación contra el período
@@ -565,7 +570,7 @@ function render(){
     <div class="kpi"><div class="v">${M.acts}</div><div class="l">Actividades</div>${dA}</div>
     <div class="kpi"><div class="v">${nm(M.promTurno)}</div><div class="l">Promotores × turno</div>${dP}</div>
     <div class="kpi"><div class="v">${clp(M.costo)}</div><div class="l">Costo promotores</div>${dC}
-      ${sinPago?`<div class="h warn">${sinPago} sin pago informado</div>`:""}</div>
+      ${sinCosto?`<div class="h warn">${sinCosto} sin costo calculable</div>`:""}</div>
     <div class="kpi"><div class="v">${clp(M.compra)}</div><div class="l">Compra producto</div>${dCo}</div>
     <div class="kpi"><div class="v">${clp(M.insumos+M.counter)}</div><div class="l">Insumos + counter</div>
       <div class="h">${clp(M.insumos)} + ${clp(M.counter)}</div></div>
@@ -674,6 +679,9 @@ function render(){
     const v=r[c[0]];
     if(c[2]==="tag") return `<td><span class="tag t-${v}">${v}</span></td>`;
     if(c[2]==="sem") return `<td style="white-space:nowrap">${semLabel(v)}</td>`;
+    // el costo total no es "0" cuando falta un factor: se muestra como dato faltante
+    if(c[0]==="costo_promotores" && r.costoIncompleto)
+      return `<td class="num warn" title="Falta el pago por turno, la cantidad de promotores o los turnos. El correo no trae el dato o viene solo en un adjunto.">sin dato</td>`;
     if(c[2]==="clp") return `<td class="num">${clp(v)}</td>`;
     if(c[2]==="n")   return `<td class="num">${nm(v)}</td>`;
     if(c[2]==="obs") return `<td class="obs">${(v||"").replace(/</g,"&lt;")}</td>`;
