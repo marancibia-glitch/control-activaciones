@@ -234,6 +234,10 @@ function prepararDatos(){
     r.mes = r.fecha_inicio ? r.fecha_inicio.slice(0,7) : (r.fecha_solicitud||"").slice(0,7);
     r.costo_promotores = (r.pago_por_turno||0) * (r.cant_promotores||0) * (r.turnos||0);
     r.prom_turno = (r.cant_promotores||0) * (r.turnos||0);
+
+    // si falta cualquiera de los tres factores el costo NO es cero: es desconocido
+
+    r.costoIncompleto = !(Number(r.pago_por_turno)>0 && Number(r.cant_promotores)>0 && Number(r.turnos)>0);
     // la región sigue siendo buscable por texto, aunque ya no tenga filtro propio
     r._s = [r.nombre_local,r.campana,r.presupuesto,r.comuna,r.region,r.cliente,
             r.ejecutivo_solicitante,r.solicitante_cliente,r.tipo,r.cadena,
@@ -375,13 +379,14 @@ function render(){
   const ppto=new Set(rows.map(r=>r.presupuesto).filter(Boolean)).size;
   const locales=new Set(rows.map(r=>r.nombre_local)).size;
   const sinPago=rows.filter(r=>r.pago_por_turno===null||r.pago_por_turno===undefined).length;
+  const sinCosto=rows.filter(r=>r.costoIncompleto).length;
   const sinPpto=rows.filter(r=>!r.presupuesto).length;
 
   document.getElementById("kpis").innerHTML=`
     <div class="kpi"><div class="v">${acts}</div><div class="l">Actividades</div></div>
     <div class="kpi"><div class="v">${nm(promTurno)}</div><div class="l">Promotores × turno</div></div>
     <div class="kpi"><div class="v">${clp(costo)}</div><div class="l">Costo promotores</div>
-      ${sinPago?`<div class="h warn">${sinPago} sin pago informado</div>`:""}</div>
+      ${sinCosto?`<div class="h warn">${sinCosto} sin costo calculable</div>`:""}</div>
     <div class="kpi"><div class="v">${clp(compra)}</div><div class="l">Compra producto</div></div>
     <div class="kpi"><div class="v">${clp(insumos+counter)}</div><div class="l">Insumos + counter</div>
       <div class="h">${clp(insumos)} + ${clp(counter)}</div></div>
@@ -423,6 +428,9 @@ function render(){
   document.getElementById("tbody").innerHTML=sortedRows.map(r=>"<tr>"+COLS.map(c=>{
     const v=r[c[0]];
     if(c[2]==="tag") return `<td><span class="tag t-${v}">${v}</span></td>`;
+    // el costo total no es "0" cuando falta un factor: se muestra como dato faltante
+    if(c[0]==="costo_promotores" && r.costoIncompleto)
+      return `<td class="num warn" title="Falta el pago por turno, la cantidad de promotores o los turnos. El correo no trae el dato o viene solo en un adjunto.">sin dato</td>`;
     if(c[2]==="clp") return `<td class="num">${clp(v)}</td>`;
     if(c[2]==="n")   return `<td class="num">${nm(v)}</td>`;
     if(c[2]==="obs") return `<td class="obs">${(v||"").replace(/</g,"&lt;")}</td>`;
