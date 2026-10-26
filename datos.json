@@ -9694,6 +9694,33 @@
                           "observaciones":  "SEMANA 37 de la campana Ritz/Club Social en Walmart (cifras de RR.HH.): 22 salas, 88 turnos a $14.500 = $1.276.000. La tarifa es $14.500 por TURNO; el correo original indica $29.000, que es el valor del DIA (2 turnos). Mismo PPTO que la semana 36 (MOSU26202608006), registro 2026-08-130, que lleva 19 salas y 66 turnos ($957.000). OJO: el correo original del 28/08 hablaba de \"4 dias en total\" en 2 fines de semana; la campana se extendio al menos a las semanas 36 y 37, y el numero de salas subio de 19 a 22. Cada semana se lleva en su propio registro para que la vista semanal cuadre.",
                           "msg_id":  "1a048fd89c5baab7",
                           "asunto":  "ACTIVACIÓN RITZ/CS WM"
+                      },
+                      {
+                          "id":  "2026-09-130",
+                          "fecha_solicitud":  "2026-09-21",
+                          "ejecutivo_solicitante":  "Mauricio Saavedra",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "GPEU26202607001",
+                          "cliente":  "Little Caesars",
+                          "campana":  "Little Caesars",
+                          "tipo":  "Degustación",
+                          "cadena":  "Walmart",
+                          "nombre_local":  "Salas Walmart (13 salas en total)",
+                          "comuna":  "Varias",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  "2026-09-21",
+                          "fecha_termino":  "2026-09-27",
+                          "horario":  "Turnos AM",
+                          "duracion_horas":  null,
+                          "cant_promotores":  1,
+                          "turnos":  13,
+                          "pago_por_turno":  19000,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "SEMANA 39 (cifras de RR.HH.): 13 salas, 13 turnos a $19.000 = $247.000. Un turno por sala. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra; esta semana se carga desde el cierre, no desde un correo de solicitud. PPTO: se usa GPEU26202607001, el numero que el usuario indico para Little Caesars. OJO: ese numero corresponde a JULIO (2607) y esta actividad es de fines de septiembre; los correos dicen que el PPTO se mantiene por mes calendario (en octubre pasa a GPEU26202610001), asi que conviene confirmar si el gasto de la semana 39 va contra este presupuesto o contra uno de septiembre.",
+                          "msg_id":  "1a0cfca179553b84",
+                          "asunto":  "Cierre Trade Semana 39 (Little Caesars)"
                       }
                   ]
 }
