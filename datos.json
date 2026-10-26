@@ -9619,7 +9619,7 @@
                           "fecha_solicitud":  "2026-09-23",
                           "ejecutivo_solicitante":  "Mauricio Saavedra",
                           "solicitante_cliente":  "",
-                          "presupuesto":  "",
+                          "presupuesto":  "GPEU26202607001",
                           "cliente":  "Little Caesars",
                           "campana":  "Little Caesars",
                           "tipo":  "Degustación",
@@ -9637,7 +9637,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Semana 36: 8 turnos a $19.000 = $152.000. Cifras del \"Cierre Trade Semana 36\" (Nycole Meza, 23/09), correo que corrige el pago de promotores de LC y KK. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra. PPTO DE SEPTIEMBRE PENDIENTE: el patron es mensual (julio LC GPEU26202607001 / KK PSEU26202607001; octubre LC GPEU26202610001 / KK PSEU26202610001), pero el correo de septiembre no esta entre los leidos. Pedirlo a Mauricio Saavedra. ",
+                          "observaciones":  "PPTO cargado 26/10 segun indicacion del usuario. NOTA: el numero corresponde a JULIO (2607) y esta actividad es de la semana 36 (31/08 al 06/09). Los correos dicen que el PPTO se mantiene por mes calendario, asi que conviene confirmar que el gasto de la semana 36 se imputo a este presupuesto y no a uno de septiembre. Semana 36: 8 turnos a $19.000 = $152.000. Cifras del \"Cierre Trade Semana 36\" (Nycole Meza, 23/09), correo que corrige el pago de promotores de LC y KK. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra. ",
                           "msg_id":  "1a0cfca179553b84",
                           "asunto":  "Cierre Trade Semana 36 (correccion pago promotores LC y KK)"
                       },
@@ -9646,7 +9646,7 @@
                           "fecha_solicitud":  "2026-09-23",
                           "ejecutivo_solicitante":  "Mauricio Saavedra",
                           "solicitante_cliente":  "",
-                          "presupuesto":  "",
+                          "presupuesto":  "PSEU26202607001",
                           "cliente":  "Krispy Kreme",
                           "campana":  "Krispy Kreme",
                           "tipo":  "Degustación",
@@ -9664,7 +9664,7 @@
                           "compra_producto":  0,
                           "fondo_insumos":  0,
                           "gestion_counter":  0,
-                          "observaciones":  "Semana 36: 18 turnos a $19.000 = $342.000. Cifras del \"Cierre Trade Semana 36\" (Nycole Meza, 23/09), correo que corrige el pago de promotores de LC y KK. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra. PPTO DE SEPTIEMBRE PENDIENTE: el patron es mensual (julio LC GPEU26202607001 / KK PSEU26202607001; octubre LC GPEU26202610001 / KK PSEU26202610001), pero el correo de septiembre no esta entre los leidos. Pedirlo a Mauricio Saavedra. ",
+                          "observaciones":  "PPTO cargado 26/10. OJO: el usuario indico GPEU26202607001 para ambas campanas, pero GPEU es el prefijo de Little Caesars; el correo de Mauricio Saavedra del 29/07 separa LC: GPEU26202607001 y KK: PSEU26202607001, y el mismo patron se repite en octubre (LC GPEU26202610001 / KK PSEU26202610001). Se cargo PSEU26202607001 para Krispy Kreme; confirmar si corresponde otro. NOTA: el numero corresponde a JULIO (2607) y esta actividad es de la semana 36 (31/08 al 06/09). Los correos dicen que el PPTO se mantiene por mes calendario, asi que conviene confirmar que el gasto de la semana 36 se imputo a este presupuesto y no a uno de septiembre. Semana 36: 18 turnos a $19.000 = $342.000. Cifras del \"Cierre Trade Semana 36\" (Nycole Meza, 23/09), correo que corrige el pago de promotores de LC y KK. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra. ",
                           "msg_id":  "1a0cfca179553b84",
                           "asunto":  "Cierre Trade Semana 36 (correccion pago promotores LC y KK)"
                       }
