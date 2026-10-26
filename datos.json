@@ -9667,6 +9667,33 @@
                           "observaciones":  "PPTO cargado 26/10. OJO: el usuario indico GPEU26202607001 para ambas campanas, pero GPEU es el prefijo de Little Caesars; el correo de Mauricio Saavedra del 29/07 separa LC: GPEU26202607001 y KK: PSEU26202607001, y el mismo patron se repite en octubre (LC GPEU26202610001 / KK PSEU26202610001). Se cargo PSEU26202607001 para Krispy Kreme; confirmar si corresponde otro. NOTA: el numero corresponde a JULIO (2607) y esta actividad es de la semana 36 (31/08 al 06/09). Los correos dicen que el PPTO se mantiene por mes calendario, asi que conviene confirmar que el gasto de la semana 36 se imputo a este presupuesto y no a uno de septiembre. Semana 36: 18 turnos a $19.000 = $342.000. Cifras del \"Cierre Trade Semana 36\" (Nycole Meza, 23/09), correo que corrige el pago de promotores de LC y KK. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra. ",
                           "msg_id":  "1a0cfca179553b84",
                           "asunto":  "Cierre Trade Semana 36 (correccion pago promotores LC y KK)"
+                      },
+                      {
+                          "id":  "2026-09-129",
+                          "fecha_solicitud":  "2026-08-28",
+                          "ejecutivo_solicitante":  "Mauricio Saavedra",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "MOSU26202608006",
+                          "cliente":  "Mondelez",
+                          "campana":  "Ritz / Club Social",
+                          "tipo":  "Activación",
+                          "cadena":  "Walmart",
+                          "nombre_local":  "Salas Walmart (22 salas en total, RM + regiones)",
+                          "comuna":  "",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  "2026-09-12",
+                          "fecha_termino":  "2026-09-13",
+                          "horario":  "Horario supermercados",
+                          "duracion_horas":  null,
+                          "cant_promotores":  1,
+                          "turnos":  88,
+                          "pago_por_turno":  14500,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "SEMANA 37 de la campana Ritz/Club Social en Walmart (cifras de RR.HH.): 22 salas, 88 turnos a $14.500 = $1.276.000. La tarifa es $14.500 por TURNO; el correo original indica $29.000, que es el valor del DIA (2 turnos). Mismo PPTO que la semana 36 (MOSU26202608006), registro 2026-08-130, que lleva 19 salas y 66 turnos ($957.000). OJO: el correo original del 28/08 hablaba de \"4 dias en total\" en 2 fines de semana; la campana se extendio al menos a las semanas 36 y 37, y el numero de salas subio de 19 a 22. Cada semana se lleva en su propio registro para que la vista semanal cuadre.",
+                          "msg_id":  "1a048fd89c5baab7",
+                          "asunto":  "ACTIVACIÓN RITZ/CS WM"
                       }
                   ]
 }
