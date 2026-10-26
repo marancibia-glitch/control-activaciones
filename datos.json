@@ -9721,6 +9721,33 @@
                           "observaciones":  "SEMANA 39 (cifras de RR.HH.): 13 salas, 13 turnos a $19.000 = $247.000. Un turno por sala. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra; esta semana se carga desde el cierre, no desde un correo de solicitud. PPTO: se usa GPEU26202607001, el numero que el usuario indico para Little Caesars. OJO: ese numero corresponde a JULIO (2607) y esta actividad es de fines de septiembre; los correos dicen que el PPTO se mantiene por mes calendario (en octubre pasa a GPEU26202610001), asi que conviene confirmar si el gasto de la semana 39 va contra este presupuesto o contra uno de septiembre.",
                           "msg_id":  "1a0cfca179553b84",
                           "asunto":  "Cierre Trade Semana 39 (Little Caesars)"
+                      },
+                      {
+                          "id":  "2026-09-131",
+                          "fecha_solicitud":  "2026-09-21",
+                          "ejecutivo_solicitante":  "Mauricio Saavedra",
+                          "solicitante_cliente":  "",
+                          "presupuesto":  "PSEU26202607001",
+                          "cliente":  "Krispy Kreme",
+                          "campana":  "Krispy Kreme",
+                          "tipo":  "Degustación",
+                          "cadena":  "Walmart",
+                          "nombre_local":  "Salas Walmart (16 salas en total)",
+                          "comuna":  "Varias",
+                          "region":  "Multirregión",
+                          "fecha_inicio":  "2026-09-21",
+                          "fecha_termino":  "2026-09-27",
+                          "horario":  "Turnos AM",
+                          "duracion_horas":  null,
+                          "cant_promotores":  1,
+                          "turnos":  18,
+                          "pago_por_turno":  19000,
+                          "compra_producto":  0,
+                          "fondo_insumos":  0,
+                          "gestion_counter":  0,
+                          "observaciones":  "SEMANA 39 (cifras de RR.HH.): 16 salas, 18 turnos a $19.000 = $342.000. LC y KK se planifican semana a semana en los correos \"ACTIVACION KK Y LC SEMANA NN\" de Mauricio Saavedra; esta semana se carga desde el cierre, no desde un correo de solicitud. COINCIDENCIA A VERIFICAR: la semana 36 (registro 2026-09-128) tiene exactamente los mismos 18 turnos a $19.000 = $342.000. Puede ser real si el programa se repitio, pero conviene confirmarlo para descartar que se hayan informado dos veces las mismas cifras. PPTO: se usa PSEU26202607001, el numero de Krispy Kreme. OJO: corresponde a JULIO (2607) y esta actividad es de fines de septiembre; en octubre el numero pasa a PSEU26202610001, asi que conviene confirmar el PPTO de septiembre.",
+                          "msg_id":  "1a0cfca179553b84",
+                          "asunto":  "Cierre Trade Semana 39 (Krispy Kreme)"
                       }
                   ]
 }
